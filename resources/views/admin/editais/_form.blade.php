@@ -185,7 +185,7 @@
 			
 		<BR><BR>
 
-		<label><H6>Licitação exclusiva para ME e EPP</H6></label>
+		<label><H6>Licitação com itens destinados à participação exclusiva para ME e EPP</H6></label>
 
 			<div class="switch">
 				<label>
