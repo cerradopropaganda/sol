@@ -16,6 +16,9 @@
       <!--Import Materialize-Stepper JavaScript -->
       <script src="{{ url('js/materialize-stepper.min.js') }}"></script>
 
+      <!--Import JQUERY MASK JavaScript -->
+      <script src="{{ url('js/jquery.mask.min.js') }}"></script>
+
       <!-- INICIALIZAÇÃO -->
   	  <script type="text/javascript">
   	  	$(document).ready(function(){
@@ -49,8 +52,8 @@
                         "sortDescending": ": A coluna está em ordem Decrescente"
                     }
                 }
-            });
-  	  	});
+          });
+  	  });
         $('.datepicker').pickadate({
           selectMonths: true, // Creates a dropdown to control month
           selectYears: 15, // Creates a dropdown of 15 years to control year,
@@ -72,7 +75,16 @@
         $(function(){
            $('.stepper').activateStepper();
         });
+
+
+
+
+
+          
   	  </script>
+
+      <!--- inclui os scripts de cada página-->
+      @yield('page-script')
           
     </body>
   </html>

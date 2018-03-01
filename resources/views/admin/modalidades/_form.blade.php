@@ -5,7 +5,7 @@
 
 
 		<div class="input-field">
-			<input type="text" name="nome" value="{{isset($registro->nome) ? $registro->nome : ''}}">
+			<input type="text" name="nome" value="{{isset($registro->nome) ? $registro->nome : ''}}" class="validate" required>
 			<label>NOME DA MODALIDADE</label>
 		</div>
 
@@ -14,13 +14,13 @@
 
 
           <p style="margin-bottom: 1em">
-            <input name="tr_escolhido" type="radio" id="789" value="789"  class="validate" required  />
-            <label for="789">APENAS FASE INICIAL</label>
+            <input name="fases" type="radio" id="fase_inicial" value="0"  class="" {{ isset($registro->fases) && $registro->fases == '0' ? 'checked' : '' }}   />
+            <label for="fase_inicial">APENAS FASE INICIAL</label>
           </p>
 
           <p style="margin-bottom: 1em">
-            <input name="tr_escolhido" type="radio" id="456" value="456"  class="validate" required  />
-            <label for="456">FASE INICIAL E FINAL</label>
+            <input name="fases" type="radio" id="fase_inicial_final" value="1"  class="" {{ isset($registro->fases) &&  $registro->fases == '1' ? 'checked' : '' }} />
+            <label for="fase_inicial_final">FASE INICIAL E FINAL</label>
           </p>
 
 
@@ -30,17 +30,13 @@
 			<div class="switch">
 				<label>
 				  Não
-				  <input type="checkbox" name="licitacao_eletronica" id="licitacao_eletronica" value="1"  {{ isset($registro->licitacao_eletronica) && $registro->licitacao_eletronica == '1' ? 'checked' : '' }} >
+				  <input type="checkbox" name="licitacao_eletronica" value="1"  {{ isset($registro->licitacao_eletronica) && $registro->licitacao_eletronica == '1' ? 'checked' : '' }} >
 				  <span class="lever"></span>
 				  Sim
 				</label>
 			</div>
 			
 		<BR><BR>
-
-
-
-
 
 
 	</div>
@@ -51,3 +47,35 @@
 
 </div>
 
+@section('page-script')
+<script type="text/javascript">
+
+    $("#frm_modalidades").validate({
+          rules: {
+              nome: {
+                  required: true,
+                  minlength: 2
+              }        
+
+          },
+          //For custom messages
+          messages: {
+              nome: {
+                  required: "Por favor insira um NOME",
+                  minlength: "Digite mais de 1 caracter"
+              }
+          },
+          errorElement : 'div',
+          errorPlacement: function(error, element) {
+            var placement = $(element).data('error');
+            if (placement) {
+              $(placement).append(error)
+            } else {
+              error.insertAfter(element);
+            }
+          }
+    });
+
+
+</script>
+@endsection

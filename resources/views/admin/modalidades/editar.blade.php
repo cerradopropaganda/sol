@@ -35,14 +35,13 @@
             
             <div class="card-content white">
         
-                      <form class="" method="post" action="{{ route('admin.modalidades.atualizar',$registro->id)}}">
+                      <form class="" id="frm_modalidades" method="post" action="{{ route('admin.modalidades.atualizar',$registro->id)}}">
                         
                         {{ csrf_field() }}
                         <input type="hidden" name="_method" value="put">
                         @include('admin.modalidades._form')
 
-                        <!--<button class="btn blue darken-1">Editar Item</button>-->
-                        <a onclick="location.href ='{{ route('admin.modalidades')}}'" class="btn blue darken-1">Editar Item</a>  
+                        <button class="btn blue darken-1">Editar Modalidade</button>
 
 
 

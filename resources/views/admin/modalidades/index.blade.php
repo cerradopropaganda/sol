@@ -33,6 +33,14 @@
             
             
             <div class="card-content white">
+
+
+            <!-- will be used to show any messages -->
+            @if ($message = Session::get('success'))
+                  <div id="msg_sucesso"  class="card-panel green lighten-2">
+                      <p class="white-text"> <i class="inline-icon material-icons">check_circle</i> {{ $message }}</p>
+                  </div>
+            @endif
               
                <a href="{{route('admin.modalidades.adicionar')}}" class="btn-floating halfway-fab btn-large left waves-effect waves-light blue" ><i class="material-icons left">add</i></a>           
               <table class="dataTable responsive-table highlight striped">
@@ -40,11 +48,22 @@
                   <tr>
                     <th width="5%">Editar</th>
                     <th width="95%">MODALIDADE</th>
+                    <th width="5%">Excluir</th>
                   </tr>
                 </thead>
                 <tbody>
-
-                    <tr>
+                  @foreach($registros as $registro)
+                      <tr>
+                        <td>
+                          <a href="{{ route('admin.modalidades.editar',$registro->id) }}" class="btn-floating waves-effect waves-light grey lighten-1"><i class="material-icons">create</i></a>
+                        </td>
+                        <td><b>{{ $registro->nome }}</b></td>
+                        <td>
+                          <a href="{{ route('admin.modalidades.deletar',$registro->id) }}" class="btn-floating waves-effect waves-light grey lighten-1"><i class="material-icons">delete_forever</i></a>
+                        </td>
+                      </tr>
+                    @endforeach
+                    <!--<tr>
                       <td>
                         <a href="{{route('admin.modalidades.adicionar')}}" class="btn-floating waves-effect waves-light grey lighten-1"><i class="material-icons">create</i></a>
                       </td>
@@ -90,7 +109,7 @@
                       </td>
                       <td><b>PATROCÍNIO</b></td>
 
-                    </tr>
+                    </tr>-->
 
 
                 </tbody>
@@ -110,4 +129,11 @@
 
 
   </div>
+@endsection
+
+
+@section('page-script')
+<script type="text/javascript">
+    $("#msg_sucesso").show().delay(5000).fadeOut();
+</script>
 @endsection

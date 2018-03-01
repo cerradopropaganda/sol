@@ -35,15 +35,13 @@
             
             <div class="card-content white">
         
-                      <form class="" method="post" action="{{ route('admin.usuarios.atualizar',$registro->id)}}">
+                      <form class=""  id="frm_usuarios"  method="post" action="{{ route('admin.usuarios.atualizar',$registro->id)}}">
                         
                         {{ csrf_field() }}
                         <input type="hidden" name="_method" value="put">
                         @include('admin.usuarios._form')
 
                         <button class="btn blue darken-1">Editar Usuário</button>
-
-
 
                       </form>
           

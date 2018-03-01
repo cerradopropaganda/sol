@@ -35,7 +35,7 @@
             
             <div class="card-content white">
         
-                      <form class="" method="post" action="{{ route('admin.usuarios.salvar')}}">
+                      <form id="frm_usuarios" class="" method="post" action="{{ route('admin.usuarios.salvar')}}">
                         
                         {{ csrf_field() }}
 
@@ -54,4 +54,6 @@
    </div>
 </div>
 
+
 @endsection
+

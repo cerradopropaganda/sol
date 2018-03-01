@@ -33,6 +33,14 @@
             
             
             <div class="card-content white">
+
+            <!-- will be used to show any messages -->
+            @if ($message = Session::get('success'))
+                  <div id="msg_sucesso" class="card-panel green lighten-2">
+                      <p class="white-text"> <i class="inline-icon material-icons">check_circle</i> {{ $message }}</p>
+                  </div>
+            @endif
+
               
                <!--<a href="{{ route('admin.usuarios.adicionar') }}" class="btn-floating btn-large left waves-effect waves-light blue" ><i class="material-icons left">add</i></a>-->
                <a href="{{ route('admin.usuarios.adicionar') }}" class="btn-floating halfway-fab btn-large left waves-effect waves-light blue" ><i class="material-icons left">add</i></a>           
@@ -79,4 +87,10 @@
 
 
   </div>
+@endsection
+
+@section('page-script')
+<script type="text/javascript">
+    $("#msg_sucesso").show().delay(5000).fadeOut();
+</script>
 @endsection

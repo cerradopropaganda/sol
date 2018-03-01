@@ -194,8 +194,10 @@ Route::prefix('admin')->group(function() {
 	Route::put('/documentos/atualizar/{id?}', ['as'=>'admin.documentos.atualizar','uses'=>'Admin\DocumentosController@atualizar']);
 	Route::get('/documentos/deletar/{id?}', ['as'=>'admin.documentos.deletar','uses'=>'Admin\DocumentosController@deletar']);
 
-	Route::get('/modalidades',['as' => 'admin.modalidades', function () {    				return view('admin.modalidades.index');	}]);
-	Route::get('/modalidades/adicionar',['as' => 'admin.modalidades.adicionar',  function () {   		return view('admin.modalidades.adicionar');	}]);
+
+	/* ROTAS MODALIDADES - ADMIN */
+	Route::get('/modalidades',['as' => 'admin.modalidades','uses'=>'Admin\ModalidadeController@index']);
+	Route::get('/modalidades/adicionar', ['as'=>'admin.modalidades.adicionar','uses'=>'Admin\ModalidadeController@adicionar']);
 	Route::post('/modalidades/salvar', ['as'=>'admin.modalidades.salvar','uses'=>'Admin\ModalidadeController@salvar']);
 	Route::get('/modalidades/editar/{id?}', ['as'=>'admin.modalidades.editar','uses'=>'Admin\ModalidadeController@editar']);
 	Route::put('/modalidades/atualizar/{id?}', ['as'=>'admin.modalidades.atualizar','uses'=>'Admin\ModalidadeController@atualizar']);

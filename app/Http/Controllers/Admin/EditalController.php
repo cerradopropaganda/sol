@@ -107,7 +107,7 @@ class UsuarioController extends Controller
 
         Usuario::create($dados);
 
-        return redirect()->route('admin.usuarios')->with('success','Usuário inserido com sucesso');
+        return redirect()->route('admin.usuarios');
         
     }
 
@@ -144,10 +144,7 @@ class UsuarioController extends Controller
         //dd($dados);
 
         Usuario::find($id)->update($dados);
-
-        //Session::flash('message', 'Successfully updated nerd!');
-
-        return redirect()->route('admin.usuarios')->with('success','Usuário atualizado com sucesso');
+        return redirect()->route('admin.usuarios');
         
     }
 
