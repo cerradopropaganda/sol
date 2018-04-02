@@ -35,15 +35,13 @@
             
             <div class="card-content white">
         
-                      <form class="" method="post" action="{{ route('admin.termos-referencia.atualizar',$registro->id)}}">
+                      <form class="frm_termoReferencia" id="frm_termoReferencia" method="post" action="{{ route('admin.termos-referencia.atualizar',$registro->id)}}">
                         
                         {{ csrf_field() }}
                         <input type="hidden" name="_method" value="put">
                         @include('admin.termos-referencia._form')
 
-                        <!--<button class="btn blue darken-1">Editar Item</button>-->
-                        <a onclick="location.href ='{{ route('admin.termos-referencia') }}'" class="btn blue darken-1">Editar Item</a>  
-
+                         <button class="btn blue darken-1">Editar Termo de Referência</button>
 
 
                       </form>

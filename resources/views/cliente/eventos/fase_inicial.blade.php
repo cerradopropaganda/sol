@@ -30,8 +30,16 @@
             </div>            
             
             <div class="card-content white">
+
+              <!-- MOSTRAR MENSAGEM DE SUCESSO -->
+              @if ($message = Session::get('success'))
+                    <div id="msg_sucesso" class="card-panel green lighten-2">
+                        <p class="white-text"> <i class="inline-icon material-icons">check_circle</i> {{ $message }}</p>
+                    </div>
+              @endif
               
-               <a href="{{route('cliente.eventos.fase_inicial_editar')}}" class="btn-floating halfway-fab btn-large left waves-effect waves-light teal lighten-2" ><i class="material-icons left">add</i></a>           
+              
+               <a href="{{route('cliente.eventos.adicionar')}}" class="btn-floating halfway-fab btn-large left waves-effect waves-light teal lighten-2" ><i class="material-icons left">add</i></a>           
               <table class="dataTable responsive-table highlight striped">
                 <thead>
                   <tr>
@@ -45,8 +53,21 @@
                 <tbody>
 
 
-
+                  @foreach($registros as $registro)
                     <tr>
+                        <td>
+                          <a href="{{ route('cliente.eventos.fase_inicial_editar',$registro->id) }}" class="btn-floating waves-effect waves-light grey lighten-1"><i class="material-icons">create</i></a>
+                        </td>
+                        <td>{{ $registro->nome_orgao }}</td>
+                        <td>{{ $registro->objeto }}</td>
+                        <td>{{ $registro->processo }}</td>
+                        <td></td>
+                      </tr>
+                  @endforeach
+
+
+
+                    <!--<tr>
                       <td>
                         <a href="{{route('cliente.eventos.fase_inicial_editar')}}" class="btn-floating waves-effect waves-light grey lighten-1"><i class="material-icons">create</i></a>
                       </td>
@@ -54,10 +75,7 @@
                       <td>Objeto 1</td>
                       <td>Processo 1</td>
                       <td>Licitação 1</td>
-                      <!--<td>
-                        ,$registro->id
-                        <a href="{{route('cliente.eventos') }}" class="btn waves-effect waves-light red lighten-2">Concluir</a>
-                      </td>-->
+
                     </tr>
 
                     <tr>
@@ -68,10 +86,7 @@
                       <td>Objeto 2</td>
                       <td>Processo 2</td>
                       <td>Licitação 2</td>
-                      <!--<td>
-                        ,$registro->id
-                        <a href="{{route('cliente.eventos') }}" class="btn waves-effect waves-light red lighten-2">Concluir</a>
-                      </td>-->
+
                     </tr>
 
                     <tr>
@@ -82,10 +97,7 @@
                       <td>Objeto 3</td>
                       <td>Processo 3</td>
                       <td>Licitação 3</td>
-                      <!--<td>
-                        ,$registro->id
-                        <a href="{{route('cliente.eventos') }}" class="btn waves-effect waves-light red lighten-2">Concluir</a>
-                      </td>-->
+
                     </tr>
 
                     <tr>
@@ -96,11 +108,8 @@
                       <td>Objeto 4</td>
                       <td>Processo 4</td>
                       <td>Licitação 4</td>
-                      <!--<td>
-                        ,$registro->id
-                        <a href="{{route('cliente.eventos') }}" class="btn waves-effect waves-light red lighten-2">Concluir</a>
-                      </td>-->
-                    </tr>
+
+                    </tr>-->
 
 
 
@@ -122,4 +131,15 @@
 
 
   </div>
+@endsection
+
+
+@section('page-script')
+<script type="text/javascript">
+  $(document).ready(function(){
+    @if ($message = Session::get('success'))
+      $("#msg_sucesso").show().delay(5000).fadeOut();
+    @endif
+  });
+</script>
 @endsection

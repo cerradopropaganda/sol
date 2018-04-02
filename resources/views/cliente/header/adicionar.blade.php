@@ -35,15 +35,14 @@
             
             <div class="card-content white">
         
-                      <form class="" method="post" action="{{ route('cliente.header.salvar')}}">
+                      <form id="frm_header" class="" method="post" action="{{ route('cliente.header.salvar')}}" enctype="multipart/form-data">
                         
                         {{ csrf_field() }}
 
                         @include('cliente.header._form')
 
 
-                        <!--<button class="btn blue darken-1">Salvar Item</button>-->
-                        <a onclick="location.href ='{{ route('cliente.header')}}'" class="btn teal lighten-2">Salvar Logomarca e Cabeçalho</a>                       
+                        <button class="btn teal lighten-1">Salvar Logomarca e Cabeçalho</button>                      
 
 
 

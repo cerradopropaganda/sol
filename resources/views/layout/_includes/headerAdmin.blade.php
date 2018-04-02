@@ -97,6 +97,11 @@ textarea.materialize-textarea:focus:not([readonly]) {
    font-size: 24px !important;
 }
 
+
+.dropdown-content li>a, .dropdown-content li>span {
+    color: #1f88e6;
+}
+
   </style>
 </head>
 <body class="grey lighten-2">
@@ -188,7 +193,7 @@ textarea.materialize-textarea:focus:not([readonly]) {
 
 					      <!-- Dropdown Cadastro -->
 							<ul id="dropdown-cadastro" class="dropdown-content">
-							  <li><a class="blue-text text-darken-1" href="{{route('admin.usuarios')}}">Usuários</a></li>
+							  <li><a class="blue-text text-darken-1" href="{{route('admin.usuarios')}}">Usuários Master</a></li>
 							  <li><a class="blue-text text-darken-1" href="{{route('admin.itens')}}">Itens</a></li>
 							  <li><a class="blue-text text-darken-1" href="{{route('admin.termos-referencia')}}">Termos de Referência</a></li>
 							  <li><a class="blue-text text-darken-1" href="{{route('admin.editais')}}">Editais</a></li>

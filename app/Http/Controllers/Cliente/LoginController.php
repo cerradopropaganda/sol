@@ -17,6 +17,8 @@ class LoginController extends Controller
     }
     */
 
+
+
     public function index(){
 
     	/* ASSIM RETORNA ARRAY */
@@ -69,6 +71,15 @@ class LoginController extends Controller
 			
 			return redirect()->route('cliente.index');
 		}
+
+
+
+    //if(Auth::guard('cliente')->attempt(['username'=>$dados['username'],'password'=>$dados['password']])){
+      //dd(Auth::guard('cliente')->check());
+      //dd('cliente encontrado');
+     // return redirect()->route('cliente.index');
+    //}
+ 
 		
 		return redirect()->route('cliente.login');
 	}

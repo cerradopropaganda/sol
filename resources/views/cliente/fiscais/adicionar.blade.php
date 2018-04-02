@@ -35,15 +35,14 @@
             
             <div class="card-content white">
         
-                      <form class="" method="post" action="{{ route('cliente.fiscais.salvar')}}">
+                      <form id="frm_fiscal" class="" method="post" action="{{ route('cliente.fiscais.salvar')}}">
                         
                         {{ csrf_field() }}
 
                         @include('cliente.fiscais._form')
 
 
-                        <!--<button class="btn blue darken-1">Salvar Item</button>-->
-                        <a onclick="location.href ='{{ route('cliente.fiscais')}}'" class="btn teal lighten-2">Salvar Fiscal</a>                       
+                        <button class="btn teal lighten-1">Salvar Fiscal</button>              
 
 
 

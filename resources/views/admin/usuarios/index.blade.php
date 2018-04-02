@@ -24,7 +24,7 @@
 
             <div class="card-content blue" style="padding: 10px 25px;">
 
-                <h5 class="card-title  white-text">Lista de Usuários do sistema</h5>
+                <h5 class="card-title  white-text">Lista de Usuários Master do sistema</h5>
                
             </div>
             
@@ -34,7 +34,7 @@
             
             <div class="card-content white">
 
-            <!-- will be used to show any messages -->
+            <!-- MOSTRAR MENSAGEM DE SUCESSO -->
             @if ($message = Session::get('success'))
                   <div id="msg_sucesso" class="card-panel green lighten-2">
                       <p class="white-text"> <i class="inline-icon material-icons">check_circle</i> {{ $message }}</p>
@@ -50,7 +50,7 @@
                     <th width="5%">Editar</th>
                     <th width="5%">Id</th>
                     <th width="20%">CNPJ</th>
-                    <th width="45%">NOME FANTASIA</th>
+                    <th width="45%">NOME DO ÓRGÃO SOLICITANTE</th>
                     <th width="20%">USUÁRIO</th>
                     <th width="5%">Excluir</th>
                   </tr>
@@ -66,7 +66,7 @@
                       <td>{{ $registro->fantasia }}</td>
                       <td>{{ $registro->username }}</td>
                       <td>
-                        <a href="{{ route('admin.usuarios.deletar',$registro->id) }}" class="btn-floating waves-effect waves-light grey lighten-1"><i class="material-icons">delete_forever</i></a>
+                        <a href="{{ route('admin.usuarios.deletar',$registro->id) }}" class="delete btn-floating waves-effect waves-light grey lighten-1"><i class="material-icons">delete_forever</i></a>
                       </td>
                     </tr>
                   @endforeach

@@ -35,14 +35,13 @@
             
             <div class="card-content white">
         
-                      <form class="" method="post" action="{{ route('cliente.fiscais.atualizar')}}"><!-- ,$registro->id -->
+                      <form id="frm_fiscal" class="" method="post" action="{{ route('cliente.fiscais.atualizar',$registro->id)}}">
                         
                         {{ csrf_field() }}
                         <input type="hidden" name="_method" value="put">
                         @include('cliente.fiscais._form')
 
-                        <!--<button class="btn blue darken-1">Editar Item</button>-->
-                        <a onclick="location.href ='{{ route('cliente.fiscais') }}'" class="btn teal lighten-2">Editar Fiscal</a>  
+                        <button class="btn teal lighten-1">Editar Fiscal</button>
 
 
 

@@ -4,72 +4,83 @@ namespace App\Http\Controllers\Admin;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use App\Usuario;
+use App\Edital;
+use App\Modalidade;
 
-class UsuarioController extends Controller
+
+class EditalController extends Controller
 {
     
     public function index(){
 
-    	/* ASSIM RETORNA ARRAY */
-		/*$contatos = [
-    		['nome'=>'Jéssica','tel'=>'35416546545'],
-    		['nome'=>'Guilherme','tel'=>'234234'],
-    		['nome'=>'Jhonlenim','tel'=>'56756756']
-    	];
+        /* ASSIM RETORNA ARRAY */
+        /*$contatos = [
+            ['nome'=>'Jéssica','tel'=>'35416546545'],
+            ['nome'=>'Guilherme','tel'=>'234234'],
+            ['nome'=>'Jhonlenim','tel'=>'56756756']
+        ];
 
-		@foreach($contatos as $contato)
+        @foreach($contatos as $contato)
 
-			<p>{{ $contato['nome'] }}</p>
-			<p>{{ $contato['tel'] }}</p>
-			
-		@endforeach
-    	*/
+            <p>{{ $contato['nome'] }}</p>
+            <p>{{ $contato['tel'] }}</p>
+            
+        @endforeach
+        */
 
-    	/* ASSIM RETORNA OBJETO */
-		/*$contatos = [
-    		(object)['nome'=>'Jéssica','tel'=>'35416546545'],
-    		(object)['nome'=>'Guilherme','tel'=>'234234'],
-    		(object)['nome'=>'Jhonlenim','tel'=>'56756756']
-    	];
+        /* ASSIM RETORNA OBJETO */
+        /*$contatos = [
+            (object)['nome'=>'Jéssica','tel'=>'35416546545'],
+            (object)['nome'=>'Guilherme','tel'=>'234234'],
+            (object)['nome'=>'Jhonlenim','tel'=>'56756756']
+        ];
 
-		@foreach($contatos as $contato)
+        @foreach($contatos as $contato)
 
-			<p>{{ $contato->nome }}</p>
-			<p>{{ $contato->tel }}</p>
-			
-		@endforeach
-    	
+            <p>{{ $contato->nome }}</p>
+            <p>{{ $contato->tel }}</p>
+            
+        @endforeach
+        
 
 
-    	$contatos = [
-    		(object)['nome'=>'Jéssica','tel'=>'35416546545'],
-    		(object)['nome'=>'Guilherme','tel'=>'234234'],
-    		(object)['nome'=>'Jhonlenim','tel'=>'56756756']
-    	];
-    	*/
-        $registros = Usuario::all();
+        $contatos = [
+            (object)['nome'=>'Jéssica','tel'=>'35416546545'],
+            (object)['nome'=>'Guilherme','tel'=>'234234'],
+            (object)['nome'=>'Jhonlenim','tel'=>'56756756']
+        ];
+        */
+       // $registros = Edital::all()->sortBy("nome");
+        $registros = Edital::join('modalidades', 'modalidades.id', '=', 'editais.id_modalidade')->get(['modalidades.nome AS modalidadeNome', 'editais.*']);
+        //with('modalidade')->get();
+        $modalidades = Modalidade::all();
 
-    	return view('admin.usuarios.index', compact('registros'));
+        //dd($registros);
+
+        return view('admin.editais.index', compact('registros','modalidades'));
     }
+
+   
 
     public function adicionar(){
 
-        return view('admin.usuarios.adicionar');
+
+        $modalidades = Modalidade::all();
+        return view('admin.editais.adicionar', compact('modalidades'));
 
     }
 
     public function editar($id){
 
-        $registro = Usuario::find($id);
+        $registro = Edital::find($id);
 
         // encrypta a senha
         //if ($registro['password']<>'') {
         //    $registro['password'] = Hash::make($registro['password']);
         //}
-
-
-        return view('admin.usuarios.editar', compact('registro'));
+        //dd($registro);
+        $modalidades = Modalidade::all();
+        return view('admin.editais.editar', compact('registro','modalidades'));
 
     }
 
@@ -77,37 +88,32 @@ class UsuarioController extends Controller
 
         $dados=$req->all();
 
-        // arruma status
-        if(isset($dados["status"])){
-            $dados["status"]='1';
+        // arruma destinada_srp
+        if(isset($dados["destinada_srp"])){
+            $dados["destinada_srp"]='1';
         }else{
-            $dados["status"]='0';
+            $dados["destinada_srp"]='0';
         }
 
-        // encrypta a senha
-        if ($req->has('password')) {
-            $dados["password"]=bcrypt($req->input('password'));
+        // arruma exclusiva_me_epp
+        if(isset($dados["exclusiva_me_epp"])){
+            $dados["exclusiva_me_epp"]='1';
+        }else{
+            $dados["exclusiva_me_epp"]='0';
         }
 
-        // arruma data_contrato_inicio
-        if(isset($dados["data_contrato_inicio"])){
-            $data_contrato_inicio = str_replace("/", "-", $_POST["data_contrato_inicio"]);
-            $dados["data_contrato_inicio"]=date('Y-m-d', strtotime($data_contrato_inicio));
+        // arruma exclusiva_itens_me_epp
+        if(isset($dados["exclusiva_itens_me_epp"])){
+            $dados["exclusiva_itens_me_epp"]='1';
+        }else{
+            $dados["exclusiva_itens_me_epp"]='0';
         }
-
-        // arruma data_contrato_final
-        if(isset($dados["data_contrato_final"])){
-            $data_contrato_final = str_replace("/", "-", $_POST["data_contrato_final"]);
-            $dados["data_contrato_final"]=date('Y-m-d', strtotime($data_contrato_final));
-        }
-
-        
 
         //dd($dados);
 
-        Usuario::create($dados);
+        Edital::create($dados);
 
-        return redirect()->route('admin.usuarios');
+        return redirect()->route('admin.editais')->with('success','EDITAL INSERIDO COM SUCESSO');
         
     }
 
@@ -115,43 +121,42 @@ class UsuarioController extends Controller
 
         $dados=$req->all();
 
-        // arruma status
-        if(isset($dados["status"])){
-            $dados["status"]='1';
+        // arruma destinada_srp
+        if(isset($dados["destinada_srp"])){
+            $dados["destinada_srp"]='1';
         }else{
-            $dados["status"]='0';
+            $dados["destinada_srp"]='0';
         }
 
-        // encrypta a senha
-        if ($req->has('password')) {
-            $dados["password"]=bcrypt($req->input('password'));
+        // arruma exclusiva_me_epp
+        if(isset($dados["exclusiva_me_epp"])){
+            $dados["exclusiva_me_epp"]='1';
+        }else{
+            $dados["exclusiva_me_epp"]='0';
         }
 
-        // arruma data_contrato_inicio
-        if(isset($dados["data_contrato_inicio"])){
-            $data_contrato_inicio = str_replace("/", "-", $_POST["data_contrato_inicio"]);
-            $dados["data_contrato_inicio"]=date('Y-m-d', strtotime($data_contrato_inicio));
+        // arruma exclusiva_itens_me_epp
+        if(isset($dados["exclusiva_itens_me_epp"])){
+            $dados["exclusiva_itens_me_epp"]='1';
+        }else{
+            $dados["exclusiva_itens_me_epp"]='0';
         }
 
-        // arruma data_contrato_final
-        if(isset($dados["data_contrato_final"])){
-            $data_contrato_final = str_replace("/", "-", $_POST["data_contrato_final"]);
-            $dados["data_contrato_final"]=date('Y-m-d', strtotime($data_contrato_final));
-        }
-
-        
 
         //dd($dados);
 
-        Usuario::find($id)->update($dados);
-        return redirect()->route('admin.usuarios');
+        Edital::find($id)->update($dados);
+
+
+
+        return redirect()->route('admin.editais')->with('success','EDITAL ATUALIZADO COM SUCESSO');
         
     }
 
     public function deletar($id){
 
-        Usuario::find($id)->delete();
-        return redirect()->route('admin.usuarios');
+        Edital::find($id)->delete();
+        return redirect()->route('admin.editais')->with('success','EDITAL EXCLUÍDO COM SUCESSO');
         
     }
 }

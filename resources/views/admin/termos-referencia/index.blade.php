@@ -31,16 +31,11 @@
 
 
                       <div class="input-field">
-                        <select name="categoria" style=" width: 350px">
-                            <!--<option value="" disabled selected>Escolha uma opção</option>-->
-                              <option selected="" value="MATERIAL EXPEDIENTE">MATERIAL EXPEDIENTE</option>
-                              <option value="MATERIAL DE CONSUMO">MATERIAL DE CONSUMO</option>
-                              <option value="MATERIAL PERMANENTE">MATERIAL PERMANENTE</option>
-                              <option value="SERVIÇOS">SERVIÇOS</option>
-                              <option value="OBRAS E SERVIÇOS DE ENGENHARIA">OBRAS E SERVIÇOS DE ENGENHARIA</option>
-                              <option value="LOCAÇÕES DIVERSAS">LOCAÇÕES DIVERSAS</option>
-                              <option value="SERVIÇOS E PEÇAS">SERVIÇOS E PEÇAS</option>
-                              <option value="MATERIAL PERMANENTE E SERVIÇOS">MATERIAL PERMANENTE E SERVIÇOS</option>
+                        <select id="id_categoria" name="id_categoria"  style=" width: 350px">
+                            <option value="" disabled selected>Escolha uma categoria</option>-->
+                             @foreach($categorias_tr as $categoriaTR)                    
+                                 <option value="{{ $categoriaTR->nome }}" > {{ $categoriaTR->nome }} </option> 
+                             @endforeach
                           </select>
                         <label>CATEGORIA</label>
                       </div>
@@ -52,6 +47,13 @@
             
             
             <div class="card-content white">
+
+               <!-- MOSTRAR MENSAGEM DE SUCESSO -->
+              @if ($message = Session::get('success'))
+                    <div id="msg_sucesso" class="card-panel green lighten-2">
+                        <p class="white-text"> <i class="inline-icon material-icons">check_circle</i> {{ $message }}</p>
+                    </div>
+              @endif
               
                <!--<a href="{{ route('admin.usuarios.adicionar') }}" class="btn-floating btn-large left waves-effect waves-light blue" ><i class="material-icons left">add</i></a>-->
                <a href="{{route('admin.termos-referencia.adicionar')}}" class="btn-floating halfway-fab btn-large left waves-effect waves-light blue" ><i class="material-icons left">add</i></a>           
@@ -60,54 +62,26 @@
                   <tr>
                     <th width="5%">Editar</th>
                     <th width="5%">CÓDIGO</th>
-                    <th width="90%">NOME</th>
+                    <th width="55%">NOME</th>
+                    <th width="30%">CATEGORIA</th>
+                    <th width="5%">Excluir</th>
                   </tr>
                 </thead>
                 <tbody>
 
+                    @foreach($registros as $registro)
                     <tr>
-                      <td>
-                        <a href="{{route('admin.termos-referencia.adicionar')}}" class="btn-floating waves-effect waves-light grey lighten-1"><i class="material-icons">create</i></a>
-                      </td>
-                      <td><b>00001</b></td>
-                      <td>MATERIAL DE CONSUMO - ALIMENTOS PERECÍVEIS</td>
-                      <!--<td>
-                        <a href="#" class="btn-floating waves-effect waves-light grey lighten-1"><i class="material-icons">delete_forever</i></a>
-                      </td>-->
-                    </tr>
-
-                    <tr>
-                      <td>
-                        <a href="{{route('admin.termos-referencia.adicionar')}}" class="btn-floating waves-effect waves-light grey lighten-1"><i class="material-icons">create</i></a>
-                      </td>
-                       <td><b>00002</b></td>
-                      <td>MATERIAL DE CONSUMO - ALIMENTOS PERECÍVEIS</td>
-                      <!--<td>
-                        <a href="#" class="btn-floating waves-effect waves-light grey lighten-1"><i class="material-icons">delete_forever</i></a>
-                      </td>-->
-                    </tr>
-
-                    <tr>
-                      <td>
-                        <a href="{{route('admin.termos-referencia.adicionar')}}" class="btn-floating waves-effect waves-light grey lighten-1"><i class="material-icons">create</i></a>
-                      </td>
-                       <td><b>00003</b></td>
-                      <td>MATERIAL DE CONSUMO - ALIMENTOS PERECÍVEIS</td>
-                      <!--<td>
-                        <a href="#" class="btn-floating waves-effect waves-light grey lighten-1"><i class="material-icons">delete_forever</i></a>
-                      </td>-->
-                    </tr>
-
-                    <tr>
-                      <td>
-                        <a href="{{route('admin.termos-referencia.adicionar')}}" class="btn-floating waves-effect waves-light grey lighten-1"><i class="material-icons">create</i></a>
-                      </td>
-                       <td><b>00004</b></td>
-                      <td>MATERIAL DE CONSUMO - ALIMENTOS PERECÍVEIS</td>
-                      <!--<td>
-                        <a href="#" class="btn-floating waves-effect waves-light grey lighten-1"><i class="material-icons">delete_forever</i></a>
-                      </td>-->
-                    </tr>
+                        <td>
+                          <a href="{{ route('admin.termos-referencia.editar',$registro->id) }}" class="btn-floating waves-effect waves-light grey lighten-1"><i class="material-icons">create</i></a>
+                        </td>
+                        <td><b>{{ $registro->codigo }}</b></td>
+                        <td>{{ $registro->nome }}</td>
+                        <td>{{ $registro->categoriaNome }}</td>
+                        <td>
+                          <a href="{{ route('admin.termos-referencia.deletar',$registro->id) }}" class="delete btn-floating waves-effect waves-light grey lighten-1"><i class="material-icons">delete_forever</i></a>
+                        </td>
+                      </tr>
+                    @endforeach
 
                 </tbody>
               </table>
@@ -126,4 +100,23 @@
 
 
   </div>
+@endsection
+
+@section('page-script')
+<script type="text/javascript">
+  $(document).ready(function(){
+      //console.log('var table: '+oTable);
+
+          var oTable = $('.dataTable').dataTable();
+          $('#id_categoria').on('change', function() {
+            //alert( this.value );
+            oTable.fnFilter( this.value);
+          });
+
+      $("#msg_sucesso").show().delay(5000).fadeOut();
+
+
+
+  });
+</script>
 @endsection

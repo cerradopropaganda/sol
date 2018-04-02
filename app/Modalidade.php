@@ -4,6 +4,7 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Notifications\Notifiable;
+use App\Edital;
 //use Illuminate\Foundation\Auth\User as Authenticatable;
 
 class Modalidade extends Model
@@ -23,5 +24,14 @@ class Modalidade extends Model
     		'nome'=>'guilherem',
     		'telefone'=>'45646454'
     	];
+    }
+
+
+    public $timestamps = false;
+
+    // Tamanho has many Produtos
+    public function editais()
+    {
+        return $this->hasMany('App\Edital');
     }
 }

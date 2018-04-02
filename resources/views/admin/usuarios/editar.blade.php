@@ -25,7 +25,7 @@
 
             <div class="card-content blue" style="padding: 10px 25px;">
 
-                <h5 class="card-title  white-text">Editar Usuário</h5>
+                <h5 class="card-title  white-text">Editar Usuário Master</h5>
                
             </div>
             

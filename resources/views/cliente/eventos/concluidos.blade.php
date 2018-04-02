@@ -31,6 +31,13 @@
             </div>            
             
             <div class="card-content white">
+
+              <!-- MOSTRAR MENSAGEM DE SUCESSO -->
+              @if ($message = Session::get('success'))
+                    <div id="msg_sucesso" class="card-panel green lighten-2">
+                        <p class="white-text"> <i class="inline-icon material-icons">check_circle</i> {{ $message }}</p>
+                    </div>
+              @endif
            
               <table class="dataTable responsive-table highlight striped">
                 <thead>
@@ -44,9 +51,21 @@
                 </thead>
                 <tbody>
 
-
-
+                   @foreach($registros as $registro)
                     <tr>
+                        <td>{{ $registro->nome_orgao }}</td>
+                        <td>{{ $registro->objeto }}</td>
+                        <td>{{ $registro->processo }}</td>
+                        <td> </td>
+                        <td>
+                           <a href="{{route('cliente.eventos.concluidos_download') }}" class="btn waves-effect waves-light teal lighten-2">Download</a>
+                        </td>
+                      </tr>
+                  @endforeach
+
+
+
+                    <!--<tr>
                       <td>Orgão 1</td>
                       <td>Objeto 1</td>
                       <td>Processo 1</td>
@@ -84,7 +103,7 @@
                       <td>
                         <a href="{{route('cliente.eventos.concluidos_download') }}" class="btn waves-effect waves-light teal lighten-2">Download</a>
                       </td>
-                    </tr>
+                    </tr>-->
 
                 </tbody>
               </table>
@@ -103,4 +122,16 @@
 
 
   </div>
+@endsection
+
+
+
+@section('page-script')
+<script type="text/javascript">
+  $(document).ready(function(){
+    @if ($message = Session::get('success'))
+      $("#msg_sucesso").show().delay(5000).fadeOut();
+    @endif
+  });
+</script>
 @endsection

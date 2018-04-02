@@ -34,10 +34,9 @@
             
             <div class="card-content white">
 
-
-            <!-- will be used to show any messages -->
+            <!-- MOSTRAR MENSAGEM DE SUCESSO -->
             @if ($message = Session::get('success'))
-                  <div id="msg_sucesso"  class="card-panel green lighten-2">
+                  <div id="msg_sucesso" class="card-panel green lighten-2">
                       <p class="white-text"> <i class="inline-icon material-icons">check_circle</i> {{ $message }}</p>
                   </div>
             @endif
@@ -59,59 +58,10 @@
                         </td>
                         <td><b>{{ $registro->nome }}</b></td>
                         <td>
-                          <a href="{{ route('admin.modalidades.deletar',$registro->id) }}" class="btn-floating waves-effect waves-light grey lighten-1"><i class="material-icons">delete_forever</i></a>
+                          <a href="{{ route('admin.modalidades.deletar',$registro->id) }}" class="delete btn-floating waves-effect waves-light grey lighten-1"><i class="material-icons">delete_forever</i></a>
                         </td>
                       </tr>
                     @endforeach
-                    <!--<tr>
-                      <td>
-                        <a href="{{route('admin.modalidades.adicionar')}}" class="btn-floating waves-effect waves-light grey lighten-1"><i class="material-icons">create</i></a>
-                      </td>
-                      <td><b>LICITAÇÃO PRESENCIAL</b></td>
-
-                    </tr>
-
-                    <tr>
-                      <td>
-                        <a href="{{route('admin.modalidades.adicionar')}}" class="btn-floating waves-effect waves-light grey lighten-1"><i class="material-icons">create</i></a>
-                      </td>
-                      <td><b>LICITAÇÃO ELETRÔNICA</b></td>
-
-                    </tr>
-
-                    <tr>
-                      <td>
-                        <a href="{{route('admin.modalidades.adicionar')}}" class="btn-floating waves-effect waves-light grey lighten-1"><i class="material-icons">create</i></a>
-                      </td>
-                      <td><b>DISPENSA DE LICITAÇÃO</b></td>
-
-                    </tr>
-
-                    <tr>
-                      <td>
-                        <a href="{{route('admin.modalidades.adicionar')}}" class="btn-floating waves-effect waves-light grey lighten-1"><i class="material-icons">create</i></a>
-                      </td>
-                      <td><b>INEXIGIBILIDADE DE LICITAÇÃO</b></td>
-
-                    </tr>
-
-                    <tr>
-                      <td>
-                        <a href="{{route('admin.modalidades.adicionar')}}" class="btn-floating waves-effect waves-light grey lighten-1"><i class="material-icons">create</i></a>
-                      </td>
-                      <td><b>CREDENCIAMENTO</b></td>
-
-                    </tr>
-
-                    <tr>
-                      <td>
-                        <a href="{{route('admin.modalidades.adicionar')}}" class="btn-floating waves-effect waves-light grey lighten-1"><i class="material-icons">create</i></a>
-                      </td>
-                      <td><b>PATROCÍNIO</b></td>
-
-                    </tr>-->
-
-
                 </tbody>
               </table>
 

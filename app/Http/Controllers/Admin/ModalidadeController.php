@@ -48,10 +48,18 @@ class ModalidadeController extends Controller
     		(object)['nome'=>'Jhonlenim','tel'=>'56756756']
     	];
     	*/
-        $registros = Modalidade::all();
+
+
+
+
+        $registros = Modalidade::all()->sortBy("nome");
+        
 
     	return view('admin.modalidades.index', compact('registros'));
     }
+
+    
+
 
     public function adicionar(){
 
@@ -86,7 +94,7 @@ class ModalidadeController extends Controller
 
         //dd($dados);
 
-        modalidade::create($dados);
+        Modalidade::create($dados);
 
         return redirect()->route('admin.modalidades')->with('success','MODALIDADE INSERIDA COM SUCESSO');
         
@@ -117,7 +125,7 @@ class ModalidadeController extends Controller
     public function deletar($id){
 
         Modalidade::find($id)->delete();
-        return redirect()->route('admin.modalidades');
+        return redirect()->route('admin.modalidades')->with('success','MODALIDADE EXCLUÍDA COM SUCESSO');
         
     }
 }

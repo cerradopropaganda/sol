@@ -19,6 +19,12 @@
       <!--Import JQUERY MASK JavaScript -->
       <script src="{{ url('js/jquery.mask.min.js') }}"></script>
 
+      <!--Import Jquery Autocomplete JavaScript -->
+      <script src="{{ url('js/jquery.autocomplete.min.js') }}"></script>
+
+      <!--Import Jquery COnfimr Dialog -->
+      <script src="//cdn.bri.io/mbox/dist/mbox-0.0.5.min.js"></script>
+
       <!-- INICIALIZAÇÃO -->
   	  <script type="text/javascript">
   	  	$(document).ready(function(){
@@ -26,8 +32,9 @@
   	  		$(".button-collapse").sideNav();
   	  		$(".dropdown-button").dropdown();
           $('select').material_select();
+          $('.modal').modal();
           
-          $('.dataTable').DataTable({
+          var oTable = $('.dataTable').DataTable({
                 language: {
                     "decimal":        "",
                     "emptyTable":     "Sem registros na tabela",
@@ -53,6 +60,10 @@
                     }
                 }
           });
+
+
+          //console.log('var table: '+oTable);
+
   	  });
         $('.datepicker').pickadate({
           selectMonths: true, // Creates a dropdown to control month
@@ -76,8 +87,14 @@
            $('.stepper').activateStepper();
         });
 
+        $('.delete').on('click',function(e){
+          if(!confirm('Você tem certeza que deseja excluir esse item?')){
+                e.preventDefault();
+          }
+        });
 
 
+        
 
 
           

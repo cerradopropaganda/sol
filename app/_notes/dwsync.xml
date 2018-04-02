@@ -1,6 +1,20 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <dwsync>
-<file name="Admin.php" server="ftp.cerradopropaganda.com/public_html/dev/sistemaPrefeituras/" local="131582691446174684" remote="131587903800000000" Dst="2" />
-<file name="User.php" server="ftp.cerradopropaganda.com/public_html/dev/sistemaPrefeituras/" local="131582522526893054" remote="131587903800000000" Dst="2" />
-<file name="Usuario.php" server="ftp.cerradopropaganda.com/public_html/dev/sistemaPrefeituras/" local="131582675843352254" remote="131587903800000000" Dst="2" />
+<file name="Admin.php" server="ftp.cerradopropaganda.com/public_html/dev/sistemaPrefeituras/" local="131641514372965659" remote="131653661400000000" Dst="1" />
+<file name="User.php" server="ftp.cerradopropaganda.com/public_html/dev/sistemaPrefeituras/" local="131641514373175811" remote="131668198200000000" Dst="1" />
+<file name="Usuario.php" server="ftp.cerradopropaganda.com/public_html/dev/sistemaPrefeituras/" local="131650945422618548" remote="131668198200000000" Dst="1" />
+<file name="CategoriaTR.php" server="ftp.cerradopropaganda.com/public_html/dev/sistemaPrefeituras/" local="131647381902789643" remote="131653661400000000" Dst="1" />
+<file name="Documento.php" server="ftp.cerradopropaganda.com/public_html/dev/sistemaPrefeituras/" local="131648367956769213" remote="131653661400000000" Dst="1" />
+<file name="Edital.php" server="ftp.cerradopropaganda.com/public_html/dev/sistemaPrefeituras/" local="131647356443588067" remote="131653661400000000" Dst="1" />
+<file name="Evento.php" server="ftp.cerradopropaganda.com/public_html/dev/sistemaPrefeituras/" local="131659643160956867" remote="131660517600000000" Dst="1" />
+<file name="Fiscal.php" server="ftp.cerradopropaganda.com/public_html/dev/sistemaPrefeituras/" local="131648411080361122" remote="131668198200000000" Dst="1" />
+<file name="Header.php" server="ftp.cerradopropaganda.com/public_html/dev/sistemaPrefeituras/" local="131648431367118851" remote="131668198200000000" Dst="1" />
+<file name="ItemCategoria.php" server="ftp.cerradopropaganda.com/public_html/dev/sistemaPrefeituras/" local="131647539475712809" remote="131668198200000000" Dst="1" />
+<file name="ItemTipo.php" server="ftp.cerradopropaganda.com/public_html/dev/sistemaPrefeituras/" local="131647539118190487" remote="131668198200000000" Dst="1" />
+<file name="Item.php" server="ftp.cerradopropaganda.com/public_html/dev/sistemaPrefeituras/" local="131665590302344346" remote="131668198200000000" Dst="1" />
+<file name="Orgao.php" server="ftp.cerradopropaganda.com/public_html/dev/sistemaPrefeituras/" local="131648383213554521" remote="131668198200000000" Dst="1" />
+<file name="Modalidade.php" server="ftp.cerradopropaganda.com/public_html/dev/sistemaPrefeituras/" local="131647356388240458" remote="131668198200000000" Dst="1" />
+<file name="TermoReferencia.php" server="ftp.cerradopropaganda.com/public_html/dev/sistemaPrefeituras/" local="131647386929392794" remote="131668198200000000" Dst="1" />
+<file name="UsuarioClienteBACKUP-REMOVER.php" server="ftp.cerradopropaganda.com/public_html/dev/sistemaPrefeituras/" local="131650904658305251" remote="131668198200000000" Dst="1" />
+<file name="EventoItem.php" server="ftp.cerradopropaganda.com/public_html/dev/sistemaPrefeituras/" local="131659655409348025" remote="131660517600000000" Dst="1" />
 </dwsync>

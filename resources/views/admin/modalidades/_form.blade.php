@@ -50,6 +50,9 @@
 @section('page-script')
 <script type="text/javascript">
 
+    /*
+    * Este método valida o formulário
+    */
     $("#frm_modalidades").validate({
           rules: {
               nome: {
@@ -76,6 +79,16 @@
           }
     });
 
+    /*
+    * Este método salva a página via ctrl+s
+    */
+    $(document).bind('keydown', function(e) {
+        if(e.ctrlKey && (e.which === 83)) {
+            $("form#frm_modalidades").submit();
+            e.preventDefault();
+            return false;
+        }
+    }); 
 
 </script>
 @endsection

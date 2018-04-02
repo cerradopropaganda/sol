@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <dwsync>
-<file name="EncryptCookies.php" server="ftp.cerradopropaganda.com/public_html/dev/sistemaPrefeituras/" local="131565405651752926" remote="131587903800000000" Dst="2" />
-<file name="RedirectIfAuthenticated.php" server="ftp.cerradopropaganda.com/public_html/dev/sistemaPrefeituras/" local="131582629011203608" remote="131587903800000000" Dst="2" />
-<file name="TrimStrings.php" server="ftp.cerradopropaganda.com/public_html/dev/sistemaPrefeituras/" local="131565405651812929" remote="131587903800000000" Dst="2" />
-<file name="TrustProxies.php" server="ftp.cerradopropaganda.com/public_html/dev/sistemaPrefeituras/" local="131565405651832930" remote="131587903800000000" Dst="2" />
-<file name="VerifyCsrfToken.php" server="ftp.cerradopropaganda.com/public_html/dev/sistemaPrefeituras/" local="131565405651862932" remote="131587903800000000" Dst="2" />
+<file name="EncryptCookies.php" server="ftp.cerradopropaganda.com/public_html/dev/sistemaPrefeituras/" local="131641514373115753" remote="131668198200000000" Dst="1" />
+<file name="RedirectIfAuthenticated.php" server="ftp.cerradopropaganda.com/public_html/dev/sistemaPrefeituras/" local="131650900069672868" remote="131668198200000000" Dst="1" />
+<file name="TrimStrings.php" server="ftp.cerradopropaganda.com/public_html/dev/sistemaPrefeituras/" local="131641514373125762" remote="131668198200000000" Dst="1" />
+<file name="TrustProxies.php" server="ftp.cerradopropaganda.com/public_html/dev/sistemaPrefeituras/" local="131641514373125762" remote="131668198200000000" Dst="1" />
+<file name="VerifyCsrfToken.php" server="ftp.cerradopropaganda.com/public_html/dev/sistemaPrefeituras/" local="131641514373135771" remote="131668198200000000" Dst="1" />
+<file name="RedirectIfNotCliente.php" server="ftp.cerradopropaganda.com/public_html/dev/sistemaPrefeituras/" local="131650894468714363" remote="131668198200000000" Dst="1" />
 </dwsync>

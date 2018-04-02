@@ -48,7 +48,8 @@ class UsuarioController extends Controller
     		(object)['nome'=>'Jhonlenim','tel'=>'56756756']
     	];
     	*/
-        $registros = Usuario::all();
+        $registros = Usuario::WHERE('nivel',1)->orderBy("fantasia")->get(); //Usuario::all()->sortBy("fantasia");
+
 
     	return view('admin.usuarios.index', compact('registros'));
     }
@@ -107,7 +108,7 @@ class UsuarioController extends Controller
 
         Usuario::create($dados);
 
-        return redirect()->route('admin.usuarios')->with('success','Usuário inserido com sucesso');
+        return redirect()->route('admin.usuarios')->with('success','USUÁRIO CADASTRADO COM SUCESSO');
         
     }
 
@@ -147,14 +148,14 @@ class UsuarioController extends Controller
 
         //Session::flash('message', 'Successfully updated nerd!');
 
-        return redirect()->route('admin.usuarios')->with('success','Usuário atualizado com sucesso');
+        return redirect()->route('admin.usuarios')->with('success','USUÁRIO ATUALIZADO COM SUCESSO');
         
     }
 
     public function deletar($id){
 
         Usuario::find($id)->delete();
-        return redirect()->route('admin.usuarios');
+        return redirect()->route('admin.usuarios')->with('success','USUÁRIO EXCLUÍDO COM SUCESSO');
         
     }
 }

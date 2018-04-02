@@ -35,15 +35,14 @@
             
             <div class="card-content white">
         
-                      <form class="" method="post" action="{{ route('admin.termos-referencia.salvar')}}">
+                      <form id="frm_termoReferencia" class="frm_termoReferencia" method="post" action="{{ route('admin.termos-referencia.salvar')}}">
                         
                         {{ csrf_field() }}
 
                         @include('admin.termos-referencia._form')
 
 
-                        <!--<button class="btn blue darken-1">Salvar Item</button>-->
-                        <a onclick="location.href ='{{ route('admin.termos-referencia')}}'" class="btn blue darken-1">Salvar Termo de Referência</a>                       
+                        <button class="btn blue darken-1">Salvar Termo de Referência</button>                       
 
 
 

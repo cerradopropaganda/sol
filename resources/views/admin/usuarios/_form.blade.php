@@ -10,16 +10,16 @@
 
 		<div class="input-field">
 			<input type="text" name="fantasia" value="{{isset($registro->fantasia) ? $registro->fantasia : ''}}" class="validate">
-			<label data-error="">NOME FANTASIA</label>
+			<label data-error="">NOME DO ÓRGÃO SOLICITANTE</label>
 		</div>
 		<br>
 		<div class="input-field">
-			<input type="text" class="datepicker" name="data_contrato_inicio" value="{{isset($registro->data_contrato_inicio) ? $registro->data_contrato_inicio : ''}}" class="validate">
-			<label data-error="">DATA INÍCIO DO CONTRATO</label>
+			<input type="text" class="datepicker" name="data_contrato_inicio" value="{{isset($registro->data_contrato_inicio) ? date( 'd/m/Y' , strtotime($registro->data_contrato_inicio )) : ''}}" class="validate">
+			<label >DATA INÍCIO DO CONTRATO</label>
 		</div>
 		<br>
 		<div class="input-field">
-			<input type="text" class="datepicker" name="data_contrato_final" value="{{isset($registro->data_contrato_final) ? $registro->data_contrato_final : ''}}" class="validate">
+			<input type="text" class="datepicker" name="data_contrato_final" value="{{isset($registro->data_contrato_final) ? date( 'd/m/Y' , strtotime($registro->data_contrato_final )) : ''}}" class="validate">
 			<label data-error="">DATA FINAL DO CONTRATO</label>
 		</div>
 
@@ -109,30 +109,38 @@
 
 	$(document).ready(function(){
 
-	    var maskBehavior = function (val) {
-		 return val.replace(/\D/g, '').length === 11 ? '(00) 00000-0000' : '(00) 0000-00009';
+
+    /*
+    * Este método corrige os telefones de são paulo
+    */
+	  var maskBehavior = function (val) {
+		  return val.replace(/\D/g, '').length === 11 ? '(00) 00000-0000' : '(00) 0000-00009';
 		},
 		options = {onKeyPress: function(val, e, field, options) {
-		 field.mask(maskBehavior.apply({}, arguments), options);
-		 }
-		};
-		 
+		  field.mask(maskBehavior.apply({}, arguments), options);
+		}};
+
+    /*
+    * Este método gera máscaras para o formulário
+    */		 
 		$('.phone').mask(maskBehavior, options);
-	  	$('.cnpj').mask('00.000.000/0000-00', {reverse: true});	  	
-	  //$('.date').mask('11/11/1111');
-	  //$('.time').mask('00:00:00');
-	  //$('.date_time').mask('00/00/0000 00:00:00');
-	  //$('.cep').mask('00000-000');
-	  //$('.phone').mask('0000-0000');
-	  //$('.phone_with_ddd').mask('(00) 0000-0000');
-	  //$('.phone_us').mask('(000) 000-0000');
-	  //$('.mixed').mask('AAA 000-S0S');
-	  //$('.cpf').mask('000.000.000-00', {reverse: true});
+  	  	$('.cnpj').mask('00.000.000/0000-00', {reverse: true});	  	
+  	  //$('.date').mask('11/11/1111');
+  	  //$('.time').mask('00:00:00');
+  	  //$('.date_time').mask('00/00/0000 00:00:00');
+  	  //$('.cep').mask('00000-000');
+  	  //$('.phone').mask('0000-0000');
+  	  //$('.phone_with_ddd').mask('(00) 0000-0000');
+  	  //$('.phone_us').mask('(000) 000-0000');
+  	  //$('.mixed').mask('AAA 000-S0S');
+  	  //$('.cpf').mask('000.000.000-00', {reverse: true});
 
-	  //$('.money').mask('000.000.000.000.000,00', {reverse: true});
-	});
+  	  //$('.money').mask('000.000.000.000.000,00', {reverse: true});
+  	});
 
-
+    /*
+    * Este método valida o formulário
+    */
     $("#frm_usuarios").validate({
           rules: {
               cnpj: {
@@ -174,10 +182,10 @@
                   maxlength: 3
                  // equalTo: "#pass"
               },
-              website: {
-                  required: true,
-                  minlength: 2
-              },
+              //website: {
+                  //required: true,
+                  //minlength: 2
+              //},
               username: {
                   required: true,
                   minlength: 2
@@ -236,10 +244,10 @@
                   maxlength: "Digite 2 caracter"
                  // equalTo: "#pass"
               },
-              website: {
-                  required: "Por favor insira um WEBSITE",
-                  minlength: "Digite mais de 1 caracter"
-              },
+              //website: {
+                  //required: "Por favor insira um WEBSITE",
+                  //minlength: "Digite mais de 1 caracter"
+              //},
               username: {
                  required: "Por favor insira um NOME DE USUÁRIO",
                   minlength: "Digite mais de 1 caracter"
@@ -261,24 +269,36 @@
     });
 
 
-/*
-* Este método pode ser adicionado dentro do $('ducument').ready();
-*/
-$.validator.addMethod("dateBR", function(value, element) {
-            if(value.length!=10) return false;
-            // verificando data
-            var data       = value;
-            var dia         = data.substr(0,2);
-            var barra1   = data.substr(2,1);
-            var mes        = data.substr(3,2);
-            var barra2   = data.substr(5,1);
-            var ano         = data.substr(6,4);
-            if(data.length!=10||barra1!="/"||barra2!="/"||isNaN(dia)||isNaN(mes)||isNaN(ano)||dia>31||mes>12)return false;
-            if((mes==4||mes==6||mes==9||mes==11) && dia==31)return false;
-            if(mes==2  &&  (dia>29||(dia==29 && ano%4!=0)))return false;
-            if(ano < 1900)return false;
-            return true;
-        }, "Informe uma data válida");  // Mensagem padrão
+    /*
+    * Este método pode ser adicionado dentro do $('ducument').ready();
+    */
+    $.validator.addMethod("dateBR", function(value, element) {
+                if(value.length!=10) return false;
+                // verificando data
+                var data       = value;
+                var dia         = data.substr(0,2);
+                var barra1   = data.substr(2,1);
+                var mes        = data.substr(3,2);
+                var barra2   = data.substr(5,1);
+                var ano         = data.substr(6,4);
+                if(data.length!=10||barra1!="/"||barra2!="/"||isNaN(dia)||isNaN(mes)||isNaN(ano)||dia>31||mes>12)return false;
+                if((mes==4||mes==6||mes==9||mes==11) && dia==31)return false;
+                if(mes==2  &&  (dia>29||(dia==29 && ano%4!=0)))return false;
+                if(ano < 1900)return false;
+                return true;
+            }, "Informe uma data válida");  // Mensagem padrão
+
+
+    /*
+    * Este método salva a página via ctrl+s
+    */
+    $(document).bind('keydown', function(e) {
+        if(e.ctrlKey && (e.which === 83)) {
+            $("form#frm_usuarios").submit();
+            e.preventDefault();
+            return false;
+        }
+    }); 
 
 </script>
 

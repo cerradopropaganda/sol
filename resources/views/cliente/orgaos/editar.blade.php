@@ -25,7 +25,7 @@
 
             <div class="card-content teal lighten-2" style="padding: 10px 25px;">
 
-                <h5 class="card-title  white-text">Editar Orgão Solicitante</h5>
+                <h5 class="card-title  white-text">Editar Órgão Solicitante</h5>
                
             </div>
             
@@ -35,14 +35,13 @@
             
             <div class="card-content white">
         
-                      <form class="" method="post" action="{{ route('cliente.orgaos.atualizar')}}"><!-- ,$registro->id -->
+                      <form id="frm_orgao"  class="" method="post" action="{{ route('cliente.orgaos.atualizar',$registro->id)}}">
                         
                         {{ csrf_field() }}
                         <input type="hidden" name="_method" value="put">
                         @include('cliente.orgaos._form')
 
-                        <!--<button class="btn blue darken-1">Editar Item</button>-->
-                        <a onclick="location.href ='{{ route('cliente.orgaos') }}'" class="btn teal lighten-2">Editar Orgão</a>  
+                        <button class="btn teal lighten-1">Editar Órgão</button>
 
 
 

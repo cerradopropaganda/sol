@@ -35,15 +35,14 @@
             
             <div class="card-content white">
         
-                      <form class="" method="post" action="{{ route('admin.itens.salvar')}}">
+                      <form id="frm_item" class="" method="post" action="{{ route('admin.itens.salvar')}}">
                         
                         {{ csrf_field() }}
 
                         @include('admin.itens._form')
 
 
-                        <!--<button class="btn blue darken-1">Salvar Item</button>-->
-                        <a onclick="location.href ='{{ route('admin.itens')}}'" class="btn blue darken-1">Salvar Item</a>                       
+                        <button class="btn blue darken-1">Salvar Item</button>                        
 
 
 

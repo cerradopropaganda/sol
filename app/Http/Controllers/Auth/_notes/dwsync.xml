@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <dwsync>
-<file name="AdminLoginController.php" server="ftp.cerradopropaganda.com/public_html/dev/sistemaPrefeituras/" local="131582532573777703" remote="131587903800000000" Dst="2" />
-<file name="ForgotPasswordController.php" server="ftp.cerradopropaganda.com/public_html/dev/sistemaPrefeituras/" local="131565405651542914" remote="131587903800000000" Dst="2" />
-<file name="LoginController.php" server="ftp.cerradopropaganda.com/public_html/dev/sistemaPrefeituras/" local="131565405651572915" remote="131587903800000000" Dst="2" />
-<file name="RegisterController.php" server="ftp.cerradopropaganda.com/public_html/dev/sistemaPrefeituras/" local="131565405651612918" remote="131587903800000000" Dst="2" />
-<file name="ResetPasswordController.php" server="ftp.cerradopropaganda.com/public_html/dev/sistemaPrefeituras/" local="131565405651632919" remote="131587903800000000" Dst="2" />
+<file name="AdminLoginController.php" server="ftp.cerradopropaganda.com/public_html/dev/sistemaPrefeituras/" local="131641514373045693" remote="131668198200000000" Dst="1" />
+<file name="ForgotPasswordController.php" server="ftp.cerradopropaganda.com/public_html/dev/sistemaPrefeituras/" local="131641514373055708" remote="131668198200000000" Dst="1" />
+<file name="LoginController.php" server="ftp.cerradopropaganda.com/public_html/dev/sistemaPrefeituras/" local="131641514373055708" remote="131668198200000000" Dst="1" />
+<file name="RegisterController.php" server="ftp.cerradopropaganda.com/public_html/dev/sistemaPrefeituras/" local="131641514373055708" remote="131668198200000000" Dst="1" />
+<file name="ResetPasswordController.php" server="ftp.cerradopropaganda.com/public_html/dev/sistemaPrefeituras/" local="131641514373065708" remote="131668198200000000" Dst="1" />
 </dwsync>

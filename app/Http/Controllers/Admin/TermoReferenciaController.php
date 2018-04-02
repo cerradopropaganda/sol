@@ -4,9 +4,12 @@ namespace App\Http\Controllers\Admin;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use App\Usuario;
+use App\TermoReferencia;
+use App\CategoriaTR;
+use App\Item;
+use Response;
 
-class UsuarioController extends Controller
+class TermoReferenciaController extends Controller
 {
     
     public function index(){
@@ -48,28 +51,32 @@ class UsuarioController extends Controller
     		(object)['nome'=>'Jhonlenim','tel'=>'56756756']
     	];
     	*/
-        $registros = Usuario::all();
+        // $registros = TermoReferencia::all();
+        $registros = TermoReferencia::join('categorias_tr', 'categorias_tr.id', '=', 'termos_referencia.id_categoria')->get(['categorias_tr.nome AS categoriaNome', 'termos_referencia.*']);
+        $categorias_tr = CategoriaTR::all();
 
-    	return view('admin.usuarios.index', compact('registros'));
+    	return view('admin.termos-referencia.index', compact('registros','categorias_tr'));
     }
 
     public function adicionar(){
 
-        return view('admin.usuarios.adicionar');
+         $categorias_tr = CategoriaTR::all();
+
+        return view('admin.termos-referencia.adicionar', compact('categorias_tr'));
 
     }
 
     public function editar($id){
 
-        $registro = Usuario::find($id);
+        $registro = TermoReferencia::find($id);
 
         // encrypta a senha
         //if ($registro['password']<>'') {
         //    $registro['password'] = Hash::make($registro['password']);
         //}
 
-
-        return view('admin.usuarios.editar', compact('registro'));
+         $categorias_tr = CategoriaTR::all();
+        return view('admin.termos-referencia.editar', compact('registro','categorias_tr'));
 
     }
 
@@ -77,37 +84,11 @@ class UsuarioController extends Controller
 
         $dados=$req->all();
 
-        // arruma status
-        if(isset($dados["status"])){
-            $dados["status"]='1';
-        }else{
-            $dados["status"]='0';
-        }
-
-        // encrypta a senha
-        if ($req->has('password')) {
-            $dados["password"]=bcrypt($req->input('password'));
-        }
-
-        // arruma data_contrato_inicio
-        if(isset($dados["data_contrato_inicio"])){
-            $data_contrato_inicio = str_replace("/", "-", $_POST["data_contrato_inicio"]);
-            $dados["data_contrato_inicio"]=date('Y-m-d', strtotime($data_contrato_inicio));
-        }
-
-        // arruma data_contrato_final
-        if(isset($dados["data_contrato_final"])){
-            $data_contrato_final = str_replace("/", "-", $_POST["data_contrato_final"]);
-            $dados["data_contrato_final"]=date('Y-m-d', strtotime($data_contrato_final));
-        }
-
-        
-
         //dd($dados);
 
-        Usuario::create($dados);
+        TermoReferencia::create($dados);
 
-        return redirect()->route('admin.usuarios');
+        return redirect()->route('admin.termos-referencia')->with('success','TERMO DE REFERÊNCIA INSERIDO COM SUCESSO');
         
     }
 
@@ -115,43 +96,71 @@ class UsuarioController extends Controller
 
         $dados=$req->all();
 
-        // arruma status
-        if(isset($dados["status"])){
-            $dados["status"]='1';
-        }else{
-            $dados["status"]='0';
-        }
-
-        // encrypta a senha
-        if ($req->has('password')) {
-            $dados["password"]=bcrypt($req->input('password'));
-        }
-
-        // arruma data_contrato_inicio
-        if(isset($dados["data_contrato_inicio"])){
-            $data_contrato_inicio = str_replace("/", "-", $_POST["data_contrato_inicio"]);
-            $dados["data_contrato_inicio"]=date('Y-m-d', strtotime($data_contrato_inicio));
-        }
-
-        // arruma data_contrato_final
-        if(isset($dados["data_contrato_final"])){
-            $data_contrato_final = str_replace("/", "-", $_POST["data_contrato_final"]);
-            $dados["data_contrato_final"]=date('Y-m-d', strtotime($data_contrato_final));
-        }
-
         
 
         //dd($dados);
 
-        Usuario::find($id)->update($dados);
-        return redirect()->route('admin.usuarios');
+        TermoReferencia::find($id)->update($dados);
+        return redirect()->route('admin.termos-referencia')->with('success','TERMO DE REFERÊNCIA ATUALIZADO COM SUCESSO');
         
     }
 
     public function deletar($id){
 
-        Usuario::find($id)->delete();
-        return redirect()->route('admin.usuarios');
+        TermoReferencia::find($id)->delete();
+        return redirect()->route('admin.termos-referencia')->with('success','TERMO DE REFERÊNCIA EXCLUÍDO COM SUCESSO');
         
     }
+
+    public function listartritens(Request $req){
+
+       $dados=$req->all();
+
+       $item = Item::SELECT('trs')->WHERE('id', $dados['id_item'])->first();
+
+       http_response_code(500);
+
+       $trs_array = explode(',', $item->trs);
+        $trs=array();
+       foreach ( $trs_array as $valor_do_array ) {
+          
+        if($valor_do_array<>'') {
+            
+            $tr_array = TermoReferencia::SELECT('codigo','nome')->WHERE('codigo', $valor_do_array)->get();
+
+
+                //echo $tr_array[0];
+                //$tr_array="{ id: $tr[0]['id'], nome: $tr[0]->nome}";
+  
+
+
+            array_push($trs,$tr_array[0]);  
+        }
+          //echo $trs;
+      }
+
+       //echo($trs_array);
+       return Response::json($trs);
+
+      // $trs = array();
+      /* foreach($trs_array as $tr_valor){
+          echo $tr_valor . '<br />';
+          if($tr_valor<>''){
+            $trs = TermoReferencia::SELECT('id','nome')->WHERE('id', $tr_valor)->get();
+          }
+          //$trs[]=$tr;
+       }*/
+
+
+       
+
+       //dd($item->id_tipo);
+
+       //$trs = TermoReferencia::SELECT('id','nome')->WHERE('id_categoria', $item->id_tipo)->get();
+
+       //return Response::json($trs);
+        
+    }
+
+
 }
