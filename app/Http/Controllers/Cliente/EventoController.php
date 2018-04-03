@@ -79,12 +79,14 @@ class EventoController extends Controller
 
     public function fase_inicial_editar($id){
 
+        /*
         // pega evento fase inicial
+        */
         $registro = Evento::find($id);
-        
-
+       
+        /*
         // pega orgãos, fiscais, modalidade e itens dos eventos
-        // $orgaos = Orgao::all();
+        */
         if(Auth::user()->id_usuario==0){   
             $orgaos = Orgao::WHERE('id_usuario', Auth::user()->id)->get(); 
         }else{
@@ -92,9 +94,7 @@ class EventoController extends Controller
             foreach($users as $user) {        
                 $orgaos = Orgao::WHERE('id_usuario', $user->id)->get();
             }
-
-       }
-       // $fiscais = Fiscal::all();
+        }
         if(Auth::user()->id_usuario==0){   
             $fiscais = Fiscal::WHERE('id_usuario', Auth::user()->id)->get(); 
         }else{
@@ -102,20 +102,21 @@ class EventoController extends Controller
             foreach($users as $user) {        
                 $fiscais = Fiscal::WHERE('id_usuario', $user->id)->get();
             }
-
-       }
-
+        }
         $modalidades = Modalidade::all();
+
+        /*
+        // pega itens desse evento
+        */
         $eventos_itens = EventoItem::join('itens', 'itens.id', '=', 'eventos_itens.id_item')->WHERE([['id_evento',$id], ['eventos_itens.id_usuario', Auth::user()->id] ])->orderBy('eventos_itens.id', 'DESC')->get(['eventos_itens.id AS idItem', 'itens.*']);
         $Count = $eventos_itens->count();
 
-
+        /*
+        // pega lista de todos TRS
+        */
         $lista_trs= TermoReferencia::all(array('codigo','nome'));
-
-
-
-       // $arrayGeral = array();
         $list = array();        
+        //$list2 = array(); 
         if($Count>0){
             foreach($eventos_itens as $evento_item) {
                 if ($evento_item->trs != ""){
@@ -125,33 +126,24 @@ class EventoController extends Controller
                         if($lista_trs->where( 'codigo' , '=' , $tr )){
                             foreach($lista_trs as $item_tr) {
                                 if($item_tr->codigo == $tr){
-                                    //$arryItem = array(
-                                    //    "codigo" => $item_tr->codigo,
-                                    //    "nome" => $item_tr->nome
-                                    //);
-                                    //array_push($arrayItens, $arryItem );                    
-                                    array_push($arryItemCode, $item_tr->codigo);
+                                    // cria o array list para fazer interceção (osório pediu pra remover função )               
+                                     array_push($arryItemCode, $item_tr->codigo);
+                                    // cria lista para fazer união de array ( nova função pedida pelo osório )
+                                    //$list2[] = $item_tr->codigo;
                                 }
-
                             }
-
                        }
                     }
-
-                    //array_push($arrayGeral, $arrayItens );
-                    $list[] = $arryItemCode;
-
-
+                    // cria o array list para fazer interceção (osório pediu pra remover função )
+                      $list[] = $arryItemCode;
                 }
             }
-
-
         }
-
-        //dd($list);
-        //dd(sizeof($list));
+        
+        /*
+        // pega o array e faz a interceção (osório pediu pra remover função )
+        */
         $sizeList=sizeof($list);
-       // dd($sizeList);
         switch ($sizeList) {
             case 0:
                 $intersect = ''; 
@@ -166,40 +158,93 @@ class EventoController extends Controller
             default:
                 $intersect ='';
         }
+        // remove repetidos do array ( nova função pedida pelo osório )
+        // $intersect = array_unique($list2);
 
-        //if(sizeof($list)>1){
-        //    $intersect = call_user_func_array('array_intersect',$list); 
-        //}else{
-        //    $intersect =$list[0];
-        //}
 
-        
-        //dd($intersect);
-
-        /*$resourceIDsThatMatchAllCritera = array_shift ($arrayGeral); 
-        foreach ($arrayGeral as $filter) {
-            foreach ($filter as $filter2) {
-             $resourceIDsThatMatchAllCritera = array_intersect ($resourceIDsThatMatchAllCritera, $filter2); 
-            }
-         } 
-
-         dd($resourceIDsThatMatchAllCritera);
-
-        $res_arr = array_shift($arrayGeral);
-        foreach($arrayGeral as $filter){
-             $res_arr = array_intersect($res_arr, $filter);
-        }
-        dd($res_arr);
-
-        $result=array_intersect($arrayGeral);
-        dd($result);
-         dd(call_user_func_array('array_intersect', $arrayItens));
-
+        /*
+        // pega TR escolhido e monta as variáveis para revisão
         */
+        $termo_referencia_revisado=$registro['termo_referencia'];
 
-        //dd($Count);
+
+        foreach($orgaos as $orgao)    {                
+           if (isset($registro->id_orgao)){
+                if ($registro->id_orgao == $orgao->id){
+                    $ORGAO_SOLICITANTE = $orgao->nome ;
+                }
+            } 
+        }
+
+
+        $substituicao = array(
+            '{{ORGAO_SOLICITANTE}}' => $ORGAO_SOLICITANTE,
+            '{{OBJETO}}' => $registro['objeto'],
+            '{{JUSTIFICATIVA}}' => $registro['justificativa'],
+            '{{DOTACAO_ORCAMENTARIA}}' => $registro['dotacao_orcamentaria']
+        );
+        $termo_referencia_revisado = strtr($termo_referencia_revisado, $substituicao);
+
+
+
+        //dd($registro['termo_referencia']);
+
+
+        /*
         // mostra view
-        return view('cliente.eventos.fase_inicial_editar', compact('registro','orgaos','fiscais','modalidades','eventos_itens','Count','lista_trs','intersect'));
+        */
+        return view('cliente.eventos.fase_inicial_editar', compact('registro','orgaos','fiscais','modalidades','eventos_itens','Count','lista_trs','intersect','termo_referencia_revisado'));
+
+    }
+
+    public function montar_tr($id){
+        // pega evento fase inicial
+        $registro = Evento::find($id);
+
+        /*
+        // pega orgãos, fiscais, modalidade e itens dos eventos
+        */
+        if(Auth::user()->id_usuario==0){   
+            $orgaos = Orgao::WHERE('id_usuario', Auth::user()->id)->get(); 
+        }else{
+            $users = Auth::user()->select('id')->where('id',Auth::user()->id_usuario)->get() ; 
+            foreach($users as $user) {        
+                $orgaos = Orgao::WHERE('id_usuario', $user->id)->get();
+            }
+        }
+
+
+        /*
+        // pega TR escolhido e monta as variáveis para revisão
+        */
+        $termo_referencia_revisado=$registro['termo_referencia'];
+
+
+        /*
+        // loop nos orgãos para pegar nome do orgão escolhido
+        */
+        foreach($orgaos as $orgao)    {                
+           if (isset($registro->id_orgao)){
+                if ($registro->id_orgao == $orgao->id){
+                    $ORGAO_SOLICITANTE = $orgao->nome ;
+                }
+            } 
+        }
+
+        /*
+        // faz a substitutição das variaveis no TR para revisão
+        */
+        $substituicao = array(
+            '{{ORGAO_SOLICITANTE}}' => $ORGAO_SOLICITANTE,
+            '{{OBJETO}}' => $registro['objeto'],
+            '{{JUSTIFICATIVA}}' => $registro['justificativa'],
+            '{{DOTACAO_ORCAMENTARIA}}' => $registro['dotacao_orcamentaria']
+        );
+        $termo_referencia_revisado = strtr($termo_referencia_revisado, $substituicao); 
+
+
+        // mostra view
+        return $termo_referencia_revisado;
 
     }
 
@@ -253,6 +298,7 @@ class EventoController extends Controller
         return view('cliente.eventos.editar', compact('registro'));
 
     }
+
 
     public function salvar(Request $req){
 

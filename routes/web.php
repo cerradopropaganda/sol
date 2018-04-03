@@ -116,6 +116,8 @@ Route::group(array('prefix' => '/cliente', 'middleware' =>  ['auth']), function(
 	Route::get('/eventos/fase_final_editar/{id?}',['as' => 'cliente.eventos.fase_final_editar','uses'=>'Cliente\EventoController@fase_final_editar']);
 
 
+	Route::get('/eventos/montar_tr/{id?}',['as' => 'cliente.eventos.montar_tr','uses'=>'Cliente\EventoController@montar_tr']);
+
 	Route::get('/eventos/itens/search',['as' => 'cliente.eventos.itens.search','uses'=>'Admin\ItemController@search']);
 	Route::post('/eventos/itens/salvar',['as' => 'cliente.eventos.item.salvar','uses'=>'Cliente\EventoItemController@salvar']);
 	Route::post('/eventos/itens/trs',['as' => 'cliente.eventos.itens.trs','uses'=>'Admin\TermoReferenciaController@listartritens']);
@@ -211,6 +213,7 @@ Route::prefix('admin')->group(function() {
 	Route::get('/termos-referencia/editar/{id?}', ['as'=>'admin.termos-referencia.editar','uses'=>'Admin\TermoReferenciaController@editar']);
 	Route::put('/termos-referencia/atualizar/{id?}', ['as'=>'admin.termos-referencia.atualizar','uses'=>'Admin\TermoReferenciaController@atualizar']);
 	Route::get('/termos-referencia/deletar/{id?}', ['as'=>'admin.termos-referencia.deletar','uses'=>'Admin\TermoReferenciaController@deletar']);
+	Route::get('/termos-referencia/mostrar/{id?}', ['as'=>'admin.termos-referencia.mostrar','uses'=>'Admin\TermoReferenciaController@mostrar']);
 
 	/* ROTAS EDITAIS - ADMIN */
 	Route::get('/editais',['as' => 'admin.editais','uses'=>'Admin\EditalController@index']);

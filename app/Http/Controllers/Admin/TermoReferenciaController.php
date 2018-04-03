@@ -112,6 +112,23 @@ class TermoReferenciaController extends Controller
         
     }
 
+
+    public function mostrar($id){
+
+        $registro = TermoReferencia::SELECT('termo_referencia')->WHERE('codigo',$id)->get();
+
+        // encrypta a senha
+        //if ($registro['password']<>'') {
+        //    $registro['password'] = Hash::make($registro['password']);
+        //}
+
+        //dd($registro['termo_referencia']);
+
+
+        return $registro;//Response::json($registro);
+
+    }
+
     public function listartritens(Request $req){
 
        $dados=$req->all();

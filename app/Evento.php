@@ -14,7 +14,7 @@ class Evento extends Model
     use Notifiable;
     protected $table = 'eventos';
     protected $fillable = [
-        'id_usuario', 'id_orgao', 'objeto', 'justificativa', 'processo', 'id_fiscal', 'dotacao_orcamentaria', 'id_modalidade', 'embasamento_legal', 'tipo_julgamento', 'destinada_srp', 'prazo_vigencia_ata', 'exclusiva_me_epp','itens_exclusivos_me_epp', 'ordem', 'created_at', 'updated_at'
+        'id_usuario', 'id_orgao', 'objeto', 'justificativa', 'processo', 'id_fiscal', 'id_tr', 'termo_referencia', 'dotacao_orcamentaria', 'id_modalidade', 'embasamento_legal', 'tipo_julgamento', 'destinada_srp', 'prazo_vigencia_ata', 'exclusiva_me_epp','itens_exclusivos_me_epp', 'ordem', 'created_at', 'updated_at'
     ];
 
 

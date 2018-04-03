@@ -29,10 +29,10 @@
 			</div>
 
 			<div class="col s3">
-			      <input name="ordenador_sexo" type="radio" id="Masculino" checked="checked" />
-			      <label for="Masculino">Masculino</label>
-			      <input name="ordenador_sexo" type="radio" id="Feminino" />
-			      <label for="Feminino">Feminino</label>
+			      <input name="ordenador_sexo"  {{ $registro->ordenador_sexo == 'masculino' ? 'checked' : '' }}  type="radio" id="ordenador_sexo_masculino" value="masculino" checked="checked" />
+			      <label for="ordenador_sexo_masculino">Masculino</label>
+			      <input name="ordenador_sexo" {{ $registro->ordenador_sexo == 'feminino' ? 'checked' : '' }} type="radio" id="ordenador_sexo_feminino"  value="feminino" />
+			      <label for="ordenador_sexo_feminino">Feminino</label>
 			</div>
 
 		</div>
@@ -55,10 +55,10 @@
 			</div>
 
 			<div class="col s3">
-			      <input name="diligente_sexo" type="radio" id="Masculino2" checked="checked" />
-			      <label for="Masculino2">Masculino</label>
-			      <input name="diligente_sexo" type="radio" id="Feminino2" />
-			      <label for="Feminino2">Feminino</label>
+			      <input name="diligente_sexo"  {{ $registro->diligente_sexo == 'masculino' ? 'checked' : '' }}  type="radio" id="diligente_sexo_masculino" value="masculino" checked="checked" />
+            <label for="diligente_sexo_masculino">Masculino</label>
+            <input name="diligente_sexo" {{ $registro->diligente_sexo == 'feminino' ? 'checked' : '' }} type="radio" id="diligente_sexo_feminino"  value="feminino" />
+            <label for="diligente_sexo_feminino">Feminino</label>
 			</div>
 
 		</div>
