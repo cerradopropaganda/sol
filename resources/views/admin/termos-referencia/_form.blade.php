@@ -25,7 +25,7 @@
 		<span style="clear: both;">
 		<br>
 		<label><H6>TERMO DE REFERÊNCIA</H6></label>
-		<textarea class="" style="height: 600px;" name="termo_referencia">{{isset($registro->termo_referencia) ? $registro->termo_referencia : ''}}</textarea>
+		<textarea class="ckeditor_basic" style="height: 600px;" name="termo_referencia">{{isset($registro->termo_referencia) ? $registro->termo_referencia : ''}}</textarea>
 		
 
 		
@@ -40,6 +40,8 @@
 
 @section('page-script')
 <script type="text/javascript">
+
+    //$('.ckeditor_basic').trumbowyg();
 
     /*
     * Este método valida o formulário

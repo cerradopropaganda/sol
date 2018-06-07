@@ -50,6 +50,63 @@
 											    </select>
 											    <label>FISCAL DE CONTRATO</label>
 											  </div>
+
+											 <br>
+
+											 <div class="input-field">
+											    <select  name="id_pregoeiro">
+											      <!--<option value="" disabled selected>Escolha um Orgão Solicitante</option>-->
+											      @foreach($pregoeiros as $pregoeiro)                    
+									                   <option value="{{ $pregoeiro->id }}" @if (isset($registro->id_pregoeiro)) @if ($registro->id_pregoeiro == $pregoeiro->id) selected  @endif @endif > {{ $pregoeiro->nome }} </option> 
+									              @endforeach
+											    </select>
+											    <label>PREGOEIRO</label>
+											  </div>
+
+											  <label><H6>SERÁ EXIGIDA GARANTIA CONTRATUAL ?</H6></label>
+
+												<div class="switch">
+													<label>
+													  Não
+													  <input type="checkbox" name="garantia_contratual" id="garantia_contratual" value="1"  {{ isset($registro->garantia_contratual) && $registro->garantia_contratual == '1' ? 'checked' : '' }} >
+													  <span class="lever"></span>
+													  Sim
+													</label>
+												</div>
+												
+											<BR><BR>
+
+											
+											<div id="box_porcentagem_garantia" style="display: {{ isset($registro->garantia_contratual) && $registro->garantia_contratual == '1' ? '' : 'none' }};" >
+												<div class="input-field">												
+													 <select  name="porcentagem_garantia">
+												      <!--<option value="" disabled selected>Escolha um Orgão Solicitante</option>-->
+												                       
+										                 <option value="1" @if (isset($registro->porcentagem_garantia)) @if ($registro->porcentagem_garantia ==1) selected  @endif @endif > 1% </option> 
+										                 <option value="2" @if (isset($registro->porcentagem_garantia)) @if ($registro->porcentagem_garantia ==2) selected  @endif @endif > 2% </option> 
+										                 <option value="3" @if (isset($registro->porcentagem_garantia)) @if ($registro->porcentagem_garantia ==3) selected  @endif @endif > 3% </option> 
+										                 <option value="4" @if (isset($registro->porcentagem_garantia)) @if ($registro->porcentagem_garantia ==4) selected  @endif @endif > 4% </option> 
+										                 <option value="5" @if (isset($registro->porcentagem_garantia)) @if ($registro->porcentagem_garantia ==5) selected  @endif @endif > 5% </option> 
+										             
+												    </select>										
+													<label>PORCENTAGEM ( % )</label>
+												</div>
+												<br>
+											</div>
+
+											<div class="input-field">												
+													 <select  name="tipo_preco">
+												      <!--<option value="" disabled selected>Escolha um Orgão Solicitante</option>-->
+												                       
+										                 <option value="0" @if (isset($registro->tipo_preco)) @if ($registro->tipo_preco ==0) selected  @endif @endif> Menor preço por item</option> 
+										                 <option value="1" @if (isset($registro->tipo_preco)) @if ($registro->tipo_preco ==1) selected  @endif @endif> Menor preço por lote </option> 
+										                 <option value="2" @if (isset($registro->tipo_preco)) @if ($registro->tipo_preco ==2) selected  @endif @endif> Menor preço global </option> 
+
+										             
+												    </select>										
+													<label>TIPO DE JULGAMENTO DA LICITAÇÃO ( ESSE NOME MESMO ? JÁ TEM NA ETAPA 6 ESSA PERGUNTA )</label>
+												</div>
+										
 											
 								       </div>
 								       <div class="step-actions">
@@ -66,6 +123,23 @@
 	                         <li class="step @if(Auth::user()->nivel>3) disable_step @endif ">
 	                            <div data-step-label="" class="step-title waves-effect waves-dark">Itens e orçamentos</div>
 	                            <div class="step-content">
+
+
+	                              <!--<div class="row">
+							        <div class="col s12">
+							          Criar novo lote: {{$registro->tipo_preco}}
+							          <div class="input-field inline">
+							            <input id="email_inline" type="email" class="validate">
+							            <label for="email_inline">Nome do Lote</label>
+							          </div>
+							          <div class="input-field inline">
+							            <button class="save-step waves-effect waves-dark btn teal lighten-2 next-step">CRIAR</button>
+							          </div>
+							        </div>
+							       </div>-->
+
+
+
 	                               <div class="row">
 
 
@@ -94,36 +168,143 @@
 							        </div>
 
 
-							        <table id="table_evento_itens" class="responsive-table highlight  teal  lighten-5">
-						                <thead>
+							        
+
+
+							        <table id="table_evento_itens" class="responsive-table striped teal  lighten-5">
+							        	
+							        	<!--<tr class="teal  lighten-4">
+							               	<th colspan="7">LOTE 2 -  nome do lote</th>
+							            </tr>
+							            <tr>
+						                    <th width="5%">ITEM</th>
+						                    <th width="50%">DESCRIÇÃO</th>
+						                    <th width="7%">UNID.</th>
+						                    <th width="8%">QUANT.</th>
+						                    <th width="8%">VAL. UNIT.</th>
+						                    <th width="8%">VAL. TOTAL</th>
+						                    <th width="14%">COTAÇÕES</th>
+						                  </tr>
+
+							            <tr class="item_48">
+								                   		<td><center><b>2</b><br><a id="48" class="excluir_item tooltipped" data-position="bottom" data-delay="0" data-tooltip="Excluir item do evento" href="http://127.0.0.1:8000/cliente/eventos/itens/deletar/48" onclick="return false;" data-tooltip-id="4cbef8b0-e7d1-dd83-c451-0a27c4ab7d0a"><i class="material-icons red-text">delete_forever</i></a></center></td>
+								                   		<td>DIETA ENTERAL, aspecto físico LÍQUIDO, características normocalórica, normoproteica, normolipídica, fonte de proteína caseinato e ptn isolada soja, fonte de carboidrato maltodextrina, fonte de lipídios óleos vegetais e/ou de peixe e/ou tcm e/ou lecitina soja, componentes adicionais aa´s, vitaminas, minerais, fibras,  características adicionais isento glúten, lactose, sacarose, sabor com ou sem sabor, aplicação sistema fechado. Embalagem contendo a informação nutricional, a quantidade líquida do produto, número do lote, registro no MS e prazo de validade mínimo de 6 meses a contar da data da entrega</td>
+								                   		<td>un.</td>
+								                   		<td data-iditem="48">
+								                   			<div class="input-field">
+										                        <input type="number" name="qtde" value="1">
+										                        <label class="active">Quantidade</label>
+										                    </div>
+				                    					</td>
+								                   		<td class="valor_unitario">R$ 38,78</td>
+								                   		<td class="valor_total">R$ 38,78</td>
+								                   		<td class="lista_orcamentos" data-iditem="48">
+								                   			  
+								                   															              
+								                   															              
+								                   															              
+								                   															              
+								                   															              
+								                   			                  
+												                    <p><input type="checkbox" name="orcamento[]" value="21" id="item_48_orcamento_21"><label for="item_48_orcamento_21"> R$ <span class="media_valor">24,30</span></label></p><br>
+												            												              
+								                   			                  
+												                    <p><input type="checkbox" name="orcamento[]" value="19" id="item_48_orcamento_19" checked=""><label for="item_48_orcamento_19"> R$ <span class="media_valor">31,40</span></label></p><br>
+												            												              
+								                   			                  
+												                    <p><input type="checkbox" name="orcamento[]" value="18" id="item_48_orcamento_18" checked=""><label for="item_48_orcamento_18"> R$ <span class="media_valor">33,94</span></label></p><br>
+												            												              
+								                   			                  
+												                    <p><input type="checkbox" name="orcamento[]" value="17" id="item_48_orcamento_17" checked=""><label for="item_48_orcamento_17"> R$ <span class="media_valor">50,99</span></label></p><br>
+												            												              
+								                   			                  
+												                    <p><input type="checkbox" name="orcamento[]" value="20" id="item_48_orcamento_20"><label for="item_48_orcamento_20"> R$ <span class="media_valor">100,00</span></label></p><br>
+												            												            												            <p class="right-align grey-text" style="display: none; border-top: 1px solid #999;">Média - <span class="valor_total">R$ 38,78</span></p>
+								                   		</td>
+								                   	</tr>
+
+
+								        <tr class="item_48">
+								                   		<td><center><b>2</b><br><a id="48" class="excluir_item tooltipped" data-position="bottom" data-delay="0" data-tooltip="Excluir item do evento" href="http://127.0.0.1:8000/cliente/eventos/itens/deletar/48" onclick="return false;" data-tooltip-id="4cbef8b0-e7d1-dd83-c451-0a27c4ab7d0a"><i class="material-icons red-text">delete_forever</i></a></center></td>
+								                   		<td>DIETA ENTERAL, aspecto físico LÍQUIDO, características normocalórica, normoproteica, normolipídica, fonte de proteína caseinato e ptn isolada soja, fonte de carboidrato maltodextrina, fonte de lipídios óleos vegetais e/ou de peixe e/ou tcm e/ou lecitina soja, componentes adicionais aa´s, vitaminas, minerais, fibras,  características adicionais isento glúten, lactose, sacarose, sabor com ou sem sabor, aplicação sistema fechado. Embalagem contendo a informação nutricional, a quantidade líquida do produto, número do lote, registro no MS e prazo de validade mínimo de 6 meses a contar da data da entrega</td>
+								                   		<td>un.</td>
+								                   		<td data-iditem="48">
+								                   			<div class="input-field">
+										                        <input type="number" name="qtde" value="1">
+										                        <label class="active">Quantidade</label>
+										                    </div>
+				                    					</td>
+								                   		<td class="valor_unitario">R$ 38,78</td>
+								                   		<td class="valor_total">R$ 38,78</td>
+								                   		<td class="lista_orcamentos" data-iditem="48">
+								                   			  
+								                   															              
+								                   															              
+								                   															              
+								                   															              
+								                   															              
+								                   			                  
+												                    <p><input type="checkbox" name="orcamento[]" value="21" id="item_48_orcamento_21"><label for="item_48_orcamento_21"> R$ <span class="media_valor">24,30</span></label></p><br>
+												            												              
+								                   			                  
+												                    <p><input type="checkbox" name="orcamento[]" value="19" id="item_48_orcamento_19" checked=""><label for="item_48_orcamento_19"> R$ <span class="media_valor">31,40</span></label></p><br>
+												            												              
+								                   			                  
+												                    <p><input type="checkbox" name="orcamento[]" value="18" id="item_48_orcamento_18" checked=""><label for="item_48_orcamento_18"> R$ <span class="media_valor">33,94</span></label></p><br>
+												            												              
+								                   			                  
+												                    <p><input type="checkbox" name="orcamento[]" value="17" id="item_48_orcamento_17" checked=""><label for="item_48_orcamento_17"> R$ <span class="media_valor">50,99</span></label></p><br>
+												            												              
+								                   			                  
+												                    <p><input type="checkbox" name="orcamento[]" value="20" id="item_48_orcamento_20"><label for="item_48_orcamento_20"> R$ <span class="media_valor">100,00</span></label></p><br>
+												            												            												            <p class="right-align grey-text" style="display: none; border-top: 1px solid #999;">Média - <span class="valor_total">R$ 38,78</span></p>
+								                   		</td>
+								                   	</tr>
+
+						                <tr class="teal  lighten-4">
+						                    <th colspan="7">LOTE 1 - nome do lote</th>
+						                </tr>
+						                -->
+						                <THEAD>
 						                  <tr>
 						                    <th width="5%">ITEM</th>
-						                    <th width="30%">DESCRIÇÃO</th>
-						                    <th width="10%">UNID.</th>
-						                    <th width="10%">QUANT.</th>
-						                    <th width="10%">VAL. UNIT.</th>
-						                    <th width="10%">VAL. TOTAL</th>
-						                    <th width="25%">COTAÇÕES</th>
+						                    <th width="50%">DESCRIÇÃO</th>
+						                    <th width="7%">UNID.</th>
+						                    <th width="8%">QUANT.</th>
+						                    <th width="8%">VAL. UNIT.</th>
+						                    <th width="8%">VAL. TOTAL</th>
+						                    <th width="14%">COTAÇÕES</th>
 						                  </tr>
-						                </thead>
+						                </THEAD>
 						                <tbody  id="itens-list" name="itens-list">
 
 						                	@if($Count>0)
+						                	@php $x=1 @endphp
+						                	@php $contador=$Count @endphp
 									          @foreach($eventos_itens as $evento_item)                    
 								                  	<tr class="item_{{ $evento_item->idItem }}">
-								                   		<td><b>{{ $evento_item->codigo }}</b><br><center><a id="{{ $evento_item->idItem }}" class="excluir_item tooltipped" data-position="bottom" data-delay="0" data-tooltip="Excluir item do evento" href="{{ route('cliente.eventos.item.deletar',$evento_item->idItem) }}" onclick="return false;"><i class="material-icons red-text">delete_forever</i></a></center></td>
+								                   		<td><center><b>{{ $contador }}</b><br><a id="{{ $evento_item->idItem }}" class="excluir_item tooltipped" data-position="bottom" data-delay="0" data-tooltip="Excluir item do evento" href="{{ route('cliente.eventos.item.deletar',$evento_item->idItem) }}" onclick="return false;"><i class="material-icons red-text">delete_forever</i></a></center></td>
 								                   		<td>{{ $evento_item->descricao }}</td>
 								                   		<td>{{ $evento_item->unidade }}</td>
-								                   		<td>
+								                   		<td data-iditem="{{ $evento_item->idItem }}">
 								                   			<div class="input-field">
-										                        <input type="text" name="pregao" value="{{isset($evento_item->qtde ) ? $evento_item->qtde  : ''}}">
+										                        <input type="number" name="qtde" value="{{isset($evento_item->qtde ) ? $evento_item->qtde  : ''}}">
 										                        <label>Quantidade</label>
 										                    </div>
 				                    					</td>
-								                   		<td></td>
-								                   		<td></td>
-								                   		<td></td>
+								                   		<td class="valor_unitario">R$ {{isset($evento_item->valor_unitario ) ? number_format($evento_item->valor_unitario, 2, ',', '.')  : ''}}</td>
+								                   		<td class="valor_total">R$ {{isset($evento_item->valor_total ) ? number_format($evento_item->valor_total, 2, ',', '.')   : ''}}</td>
+								                   		<td class="lista_orcamentos" data-iditem="{{ $evento_item->idItem }}">
+								                   			@foreach($orcamentos as $orcamento)  
+								                   			@if($orcamento->id_item ==$evento_item->codigo)                  
+												                    <p><input  type="checkbox" name="orcamento[]" value="{{ $orcamento->id }}" id="item_{{ $evento_item->idItem }}_orcamento_{{ $orcamento->id  }}" @if(preg_match(",$orcamento->id,", $evento_item->cotacoes)) checked  @endif  /><label for="item_{{ $evento_item->idItem }}_orcamento_{{ $orcamento->id  }}"><!--{{ $orcamento->orgao  }} - --> R$ <span class=media_valor>{{ number_format($orcamento->valor, 2, ',', '.')  }}</span></label></p><br>
+												            @endif
+												            @endforeach
+												            <p class="right-align grey-text" style="display: none; border-top: 1px solid #999;">Média - <span class="valor_total">R$ {{isset($evento_item->valor_total ) ? number_format($evento_item->valor_total, 2, ',', '.')  : ''}}</span></p>
+								                   		</td>
 								                   	</tr>
+								                   	@php $x++ @endphp
+								                   	@php $contador-- @endphp
 								              @endforeach
 								            @else
 											        <tr class="no_item" style="background: #f2f2f2">
@@ -134,6 +315,41 @@
 														</td>
 													</tr>
 											@endif
+
+											
+											<!--<tr>
+						                    <td>1</td>
+						                    <td>caneta esferográfica, material plástico reciclado, quantidade cargas 1, material ponta latão com esfera de tungstênio, tipo escrita média, cor tinta azul, características adicionais corpo sextavado,                                transparente e orifício lateral</td>
+						                    <td>CX. C/ 50</td>
+						                    <td>
+						                      
+						                      <div class="input-field">
+						                        <input type="text" name="pregao" value="{{isset($registro->pregao) ? $registro->pregao : ''}}">
+						                        <label>Quantidade</label>
+						                      </div>
+
+						                    </td>
+						                    <td>0,53</td>
+						                    <td>R$ 53,00</td>
+						                    <td>
+						                      
+
+						                      <p>
+						                        <input name="tipo" type="checkbox" id="licitacao_presencial" />
+						                        <label for="licitacao_presencial">Empresa 1 - 0,86</label>
+						                      </p>
+						                      <p>
+						                        <input name="tipo" type="checkbox" id="licitacao_eletronica" />
+						                        <label for="licitacao_eletronica">Empresa 2 - 0,72</label>
+						                      </p>
+						                      <p>
+						                        <input name="checkbox" type="checkbox" id="dispensa_licitacao"  />
+						                        <label for="dispensa_licitacao">Empresa 3- 0,67</label>
+						                      </p>
+						                      <p class="right-align grey-text" style="display: block; border-top: 1px solid #999;">Média - 0,xx</p>
+
+						                    </td>
+						                  </tr>-->
 							            </tbody>
 						            </table>
 
@@ -310,7 +526,7 @@
 	                                  </div>-->
 	                                  	<br>
 
-	                                	<table  id="table_evento_itens_tr" class="responsive-table centered teal  lighten-5">
+	                                	<table  id="table_evento_itens_tr" class="responsive-table centered striped teal  lighten-5">
 						                <thead>
 						                  <tr>
 						                    <th width="10%">ITEM</th>
@@ -320,9 +536,11 @@
 						                </thead>
 						                <tbody  id="itens-list-tr" name="itens-list-tr">
 						                	@if($Count>0)
+						                	@php $x=1 @endphp
+						                	@php $contador=$Count @endphp
 									          @foreach($eventos_itens as $evento_item)                    
 								                  	<tr class="item_{{ $evento_item->idItem }}">
-								                   		<td><b>{{ $evento_item->codigo }}</b></td>
+								                   		<td><b>{{ $x }}</b></td>
 								                   		<td>{{ $evento_item->descricao }}</td>
 								                   		<td class="trs">
 
@@ -360,6 +578,7 @@
 															@endif @endforeach @endif @endforeach @endif]</textarea>
 								                   		</td>
 								                   	</tr>
+								                   	@php $x++ @endphp
 								              @endforeach
 								            @else
 											        <tr class="no_item" style="background: #f2f2f2">
@@ -465,14 +684,21 @@
 	                                  <span style="clear: both;">
 									  <br>
 									  <label><H6>TERMO DE REFERÊNCIA</H6></label>
-  									  <textarea class="" style="height: 600px;" name="termo_referencia">{{isset($registro->termo_referencia) ? $registro->termo_referencia : ''}}</textarea>
+  									  <!--<textarea class="editor_basico" style="height: 600px;" name="termo_referencia" id="termo_referencia">{{isset($registro->termo_referencia) ? $registro->termo_referencia : ''}}</textarea>-->
+
+
+
+
+  									  <textarea class="editor_basico" style="height: 600px;" name="termo_referencia" id="termo_referencia">{{isset($termo_referencia_revisado) ? $termo_referencia_revisado : ''}}</textarea>
+  									 
+
 
 
 
 
 	                               </div>
 	                               <div class="step-actions">
-	                                  <button class="save-step waves-effect waves-dark btn teal lighten-2 next-step">SALVAR E IR PARA DOTAÇÃO ORÇAMENTÁRIA</button>   
+	                                  <button id="btn_alteracoes_tr" class="save-step waves-effect waves-dark btn teal lighten-2">SALVAR TERMO DE REFERÊNCIA</button>   
 									  <button class="waves-effect waves-dark btn-flat previous-step">VOLTAR</button> 
 	                               </div>
 	                            </div>
@@ -505,7 +731,7 @@
 
 							
 	                         <!-- ETAPA 6 -->
-	                         <li class="step  @if(Auth::user()->nivel<>4 && Auth::user()->nivel<>1) disable_step @endif">
+	                         <li class="step  @if(Auth::user()->nivel<>4 && Auth::user()->nivel<>1 && Auth::user()->nivel<>3) disable_step @endif">
 	                            <div data-step-label=""  class="step-title waves-effect waves-dark">Formulário CPL: Definição de modalidade e itens exclusivos</div>
 	                            <div class="step-content">
 	                               <div class="row">
@@ -522,7 +748,7 @@
 
 										<BR>
 
-										<div class="input-field" id="embasamento_legal" style="display: none;">
+										<div class="input-field" id="embasamento_legal" style="display: {{ isset($registro->id_modalidade) && $registro->id_modalidade == '7' ? '' : 'none' }};" >
 											<textarea class="materialize-textarea" name="embasamento_legal">{{isset($registro->embasamento_legal) ? $registro->embasamento_legal : ''}}</textarea>
 											<label>EMBASAMENTO LEGAL DA DISPENSA</label>
 										</div>
@@ -532,7 +758,7 @@
 											<label>TIPO DE JULGAMENTO</label>
 										</div>
 
-										<label><H6>DESTINADA AO SRP?</H6></label>
+										<label><H6>DESTINADO AO SRP (SISTEMA DE REGISTRO DE PREÇOS) ?</H6></label>
 
 											<div class="switch">
 												<label>
@@ -545,12 +771,16 @@
 											
 										<BR><BR>
 
-										<div class="input-field">
-											<input type="text" class="datepicker" name="prazo_vigencia_ata" value="{{isset($registro->prazo_vigencia_ata) ? $registro->prazo_vigencia_ata : ''}}">
-											<label>PRAZO DE VIGÊNCIA DA ATA</label>
+										
+										<div id="box_prazo_vigencia_ata" style="display: {{ isset($registro->destinada_srp) && $registro->destinada_srp == '1' ? '' : 'none' }};" >
+											<div class="input-field">												
+												<input type="text"   name="prazo_vigencia_ata" value="{{isset($registro->prazo_vigencia_ata) ? $registro->prazo_vigencia_ata : ''}}">
+												<span class="helper-text" >Ex: (2 meses )</span>											
+												<label>PRAZO DE VIGÊNCIA DA ATA</label>
+											</div>
+											<br>
 										</div>
-
-										<br>
+										
 										
 										<label><H6>Licitação exclusiva para ME e EPP?</H6></label>
 
@@ -565,6 +795,8 @@
 											
 										<BR><BR>
 
+										<div id="box_itens_exclusivos_me_epp" style="display: {{ isset($registro->exclusiva_me_epp) && $registro->exclusiva_me_epp == '1' ? 'none' : '' }};" >
+
 										<label><H6>Licitação com itens destinados à participação exclusiva para ME e EPP?</H6></label>
 
 											<div class="switch">
@@ -578,12 +810,14 @@
 											
 										<BR><BR>
 
+										</div>
+
 
 
 
 	                               </div>
 	                               <div class="step-actions">
-	                                  <button class="save-step waves-effect waves-dark btn teal lighten-2 next-step">SALVAR E REVISAR TR</button>   
+	                                  <button id="btn_formulario_cpl" class="save-step waves-effect waves-dark btn teal lighten-2 next-step">SALVAR E REVISAR TR</button>   
 									  <button class="waves-effect waves-dark btn-flat previous-step">VOLTAR</button> 
 	                               </div>
 	                            </div>
@@ -596,11 +830,63 @@
 	                            <div data-step-label=""  class="step-title waves-effect waves-dark">Revisar Itens e Orçamentos</div>
 	                            <div class="step-content">
 	                               <div class="row">
-	                                  <span style="clear: both;">
+	                                  <!--<span style="clear: both;">
 									  <br>
-									  <label><H6>REVISAR TERMO DE REFERÊNCIA</H6></label>
-  									  <textarea id="termo_referencia_revisao" class="" style="height: 600px;" readonly>{{isset($termo_referencia_revisado) ? $termo_referencia_revisado : ''}}</textarea>
+									  <label><H6>REVISAR TERMO DE REFERÊNCIA</H6></label>-->
+  									  <!--<textarea id="termo_referencia_revisao" class="" style="height: 600px;" readonly>{{isset($termo_referencia_revisado) ? $termo_referencia_revisado : ''}}</textarea>-->
+  									  <!--<iframe frameborder="0" id="termo_referencia_revisao" style="border: 1px solid #a9a9a9; width: 100%; height: 600px; padding: 20px;"  src="{{ route('cliente.eventos.verTermoReferencia',$registro->id)}}"></iframe>-->
 
+  									  <table  id="table_evento_itens_tr" class="responsive-table centered striped teal  lighten-5">
+						                <thead>
+						                  <tr>
+
+						                    <th width="5%">ITEM</th>
+						                    <th width="58%">DESCRIÇÃO</th>
+						                    <th width="7%">UNID.</th>
+						                    <th width="7%">QUANT.</th>
+						                    <th width="10%">VAL. UNIT.</th>
+						                    <th width="13%">VAL. TOTAL</th>
+						                  </tr>
+						                </thead>
+						                <tbody  id="itens-list-tr-revisao" name="itens-list-tr-revisao">
+						                	@if($Count>0)
+						                	@php $x=1 @endphp
+						                	@php $contador=$Count @endphp
+									          @foreach($eventos_itens as $evento_item)                    
+								                  	<tr class="item_{{ $evento_item->idItem }}">
+								                   		<td><b>{{ $x }}</b></td>
+								                   		<td>{{ $evento_item->descricao }}</td>
+								                   		<td>{{ $evento_item->unidade  }}</td>
+								                   		<td>{{ $evento_item->qtde }}</td>
+								                   		<td>
+
+								                   			R$ {{ number_format($evento_item->valor_unitario, 2, ',', '.')  }}
+
+								                   			
+
+								                   		</td>
+								                   		<td>
+
+								                   			R$ {{ number_format($evento_item->valor_total, 2, ',', '.')  }}
+
+								                   			
+
+								                   		</td>
+								                   	</tr>
+								                   	@php $x++ @endphp
+								              @endforeach
+								            @else
+											        <tr class="no_item" style="background: #f2f2f2">
+											        	<td colspan="3">
+											             	<span class="black-text">
+														        <p style="text-align: center;"><br>SEM ITENS ADICIONADOS, VOLTE À ETAPA 2 PARA ADICIONAR ITENS  <br><br> </p>
+														    </span>
+														</td>
+													</tr>
+											@endif
+
+						                </tbody>
+						                </table>
 
 
 
@@ -632,35 +918,35 @@
 					                </thead>
 					                <tbody>
 					                  <tr>
-					                    <td>&nbsp&nbsp&nbsp&nbsp<a class="waves-effect waves-dark btn teal lighten-2"><i class="large material-icons left">file_download</i>  DOWNLOAD</a></td>
+					                    <td>&nbsp&nbsp&nbsp&nbsp<a href="{{route('cliente.eventos.gerarDocumento', $registro->id)}}/15" target="_blank" class="waves-effect waves-dark btn teal lighten-2"><i class="large material-icons left">file_download</i>  DOWNLOAD</a></td>
 					                    <td>OFÍCIO</td>
 					                  </tr>
 					                  <tr>
-					                   <td>&nbsp&nbsp&nbsp&nbsp<a class="waves-effect waves-dark btn teal lighten-2"><i class="large material-icons left">file_download</i>  DOWNLOAD</a></td>
+					                   <td>&nbsp&nbsp&nbsp&nbsp<a href="{{route('cliente.eventos.gerarTermoReferencia', $registro->id)}}" target="_blank" class="waves-effect waves-dark btn teal lighten-2"><i class="large material-icons left">file_download</i>  DOWNLOAD</a></td>
 					                    <td>TERMO DE REFERÊNCIA</td>
 					                  </tr>
 
 					                  <tr>
-					                    <td>&nbsp&nbsp&nbsp&nbsp<a class="waves-effect waves-dark btn teal lighten-2"><i class="large material-icons left">file_download</i>  DOWNLOAD</a></td>
+					                    <td>&nbsp&nbsp&nbsp&nbsp<a href="{{route('cliente.eventos.gerarDocumento', $registro->id)}}/17" target="_blank" class="waves-effect waves-dark btn teal lighten-2"><i class="large material-icons left">file_download</i>  DOWNLOAD</a></td>
 					                    <td>ORÇAMENTOS</td>
 					                  </tr>
 
 					                  <tr>
-					                    <td>&nbsp&nbsp&nbsp&nbsp<a class="waves-effect waves-dark btn teal lighten-2"><i class="large material-icons left">file_download</i>  DOWNLOAD</a></td>
+					                    <td>&nbsp&nbsp&nbsp&nbsp<a href="{{route('cliente.eventos.gerarDocumento', $registro->id)}}/8" target="_blank" class="waves-effect waves-dark btn teal lighten-2"><i class="large material-icons left">file_download</i>  DOWNLOAD</a></td>
 					                    <td>DECLARAÇÃO DE SALDO ORÇAMENTÁRIO</td>
 					                  </tr>
 
 					                  <tr>
-					                    <td>&nbsp&nbsp&nbsp&nbsp<a class="waves-effect waves-dark btn teal lighten-2"><i class="large material-icons left">file_download</i>  DOWNLOAD</a></td>
+					                    <td>&nbsp&nbsp&nbsp&nbsp<a href="{{route('cliente.eventos.gerarDocumento', $registro->id)}}/9" target="_blank" class="waves-effect waves-dark btn teal lighten-2"><i class="large material-icons left">file_download</i>  DOWNLOAD</a></td>
 					                    <td>DECLARAÇÃO DE COMPATIBILIDADE COM PPA, LDO E LOA</td>
 					                  </tr>
 
 					                  <tr>
-					                   <td>&nbsp&nbsp&nbsp&nbsp<a class="waves-effect waves-dark btn teal lighten-2"><i class="large material-icons left">file_download</i>  DOWNLOAD</a></td>
+					                   <td>&nbsp&nbsp&nbsp&nbsp<a href="{{route('cliente.eventos.gerarDocumento', $registro->id)}}/14" target="_blank" class="waves-effect waves-dark btn teal lighten-2"><i class="large material-icons left">file_download</i>  DOWNLOAD</a></td>
 					                    <td>DESPACHO DA CPL</td>
 					                  </tr>
 					                  <tr>
-					                    <td>&nbsp&nbsp&nbsp&nbsp<a class="waves-effect waves-dark btn teal lighten-2"><i class="large material-icons left">file_download</i>  DOWNLOAD</a></td>
+					                    <td>&nbsp&nbsp&nbsp&nbsp<a href="{{route('cliente.eventos.gerarDocumento', $registro->id)}}/13" target="_blank" class="waves-effect waves-dark btn teal lighten-2"><i class="large material-icons left">file_download</i>  DOWNLOAD</a></td>
 					                    <td>AUTORIZAÇÃO PARA LICITAR</td>
 					                  </tr>
 					                  
@@ -681,7 +967,52 @@
 
 @section('page-script')
 <script type="text/javascript">
+
 	$(document).ready(function(){
+
+		/*
+	    * Este método apaga a mensagem de sucesso após 5 segundos
+	    */
+		@if ($message = Session::get('success'))
+	      $("#msg_sucesso").show().delay(5000).fadeOut();
+	      $('.stepper').openStep(2);
+	    @endif  
+
+		/*
+	    * Este método inicializa editor ckeditor
+	    
+	    var myeditor = ClassicEditor
+	        .create( document.querySelector( '.editor_basico' ), {
+	        toolbar: [ 'bold', 'italic','numberedList', 'bulletedList','source' ]
+	    } )
+	       .then
+    	   (editor => { editorinstance =editor;})
+	    .catch( error => {
+	        console.log( error );
+	    } );
+		*/
+
+	    $('.editor_basico').trumbowyg({
+		    btns: [
+		        //['viewHTML'],
+		        ['undo', 'redo'], // Only supported in Blink browsers
+		        //['formatting'],
+		        //['strong', 'em', 'del'],
+		        ['strong'],
+		        ['orderedList','unorderedList'],
+		        //['superscript', 'subscript'],
+		        //['link'],
+		        //['insertImage'],
+		        ['justifyLeft', 'justifyCenter', 'justifyRight', 'justifyFull'],
+		        
+		        //['horizontalRule'],
+		        //['removeformat'],
+		        ['fullscreen']
+		    ]
+		});
+				
+
+	
 		/*
 	    * Este método gera máscaras para o formulário
 	    */
@@ -720,6 +1051,10 @@
   	 	return false;
 
   	});*/
+
+
+
+  	
 
   	$(document).on('click','.excluir_item',function(e){ 
   		console.log('excluir item');	 	
@@ -882,6 +1217,162 @@
 		})
   	 	return false;
   	});
+
+
+	//$("input[name='qtde']").bind('keyup mouseup', function () {
+	$(document).on('keyup mouseup',"input[name='qtde']", function(){
+
+
+
+
+
+
+    	var id_evento_item=$(this).parent().parent().attr('data-idItem');
+ 	   console.log('id item:'+id_evento_item);
+
+		//idItem
+		var soma_valor=0;
+		var media_valor=0;
+		var qtde_itens=$(this).val();
+		var cotacoes =',';
+		console.log($(this).parent().parent().next().next().next().html());
+        var values = $(this).parent().parent().next().next().next().find('input:checkbox:checked').map(function () {
+		  	console.log('orçamento:' +this.value +' - '+ $(this).next().find('.media_valor').html());
+		  	cotacoes = cotacoes +this.value+',';
+		  	valor_atual=parseFloat($(this).next().find('.media_valor').html().replace("," , ".")).toFixed(2);
+			soma_valor +=parseFloat(valor_atual);
+			//console.log(soma_valor);
+
+		}).get();
+
+		media_valor=parseFloat(soma_valor/$(this).parent().parent().next().next().next().find('input:checkbox:checked').length);
+
+		if(isNaN(media_valor) == true) media_valor=0;
+
+		valor_total=parseFloat(media_valor*qtde_itens);
+		
+		if(isNaN(valor_total) == true) valor_total=0;
+
+		$('.item_' + id_evento_item + ' .valor_unitario').html(media_valor.toLocaleString('pt-br',{style: 'currency', currency: 'BRL'}));
+		$('.item_' + id_evento_item + ' .valor_total').html(valor_total.toLocaleString('pt-br',{style: 'currency', currency: 'BRL'}));
+
+		console.log(media_valor);
+		console.log(valor_total);
+
+		// salva o orçamento selecionado e atualiza valores médios dos itens
+		$.ajaxSetup({
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="_token"]').attr('content')
+            }
+        })
+        var formData = {
+            //id_item: id_evento_item,
+            id_evento: $('#frm_evento input[name="id_evento"]').val(),
+            id_usuario: $('#frm_evento input[name="id_usuario"]').val(),
+            qtde: qtde_itens,
+            cotacoes: cotacoes,
+            valor_unitario: media_valor,
+            valor_total: valor_total,
+            _token: $('#frm_evento input[name="_token"]').val()
+        }
+        var state = 'put';
+        var type = "POST";
+        var my_url = '{{route("cliente.eventos.item.atualizar")}}/'+id_evento_item;
+        $.ajax({
+            type: type,
+            url: my_url,
+            data: formData,
+            dataType: 'json',
+            success: function (data) {
+            	console.log('iten atualizado com sucesso');
+            },
+            error: function (data3) {
+                console.log('Error:', data3);
+            }
+        });        
+
+
+
+
+
+
+	});
+
+
+	$(document).on('change',".lista_orcamentos input[type='checkbox']", function(){
+        
+       
+
+       var id_evento_item=$(this).parent().parent().attr('data-idItem');
+ 	   console.log('id item:'+id_evento_item);
+
+		//idItem
+		var soma_valor=0;
+		var media_valor=0;
+		var qtde_itens=$('.item_' + id_evento_item + ' input[name="qtde"]').val();
+		var cotacoes =',';
+		//console.log('qtde :'+qtde_itens);
+        var values = $(this).parent().parent().find('input:checkbox:checked').map(function () {
+		  	console.log('orçamento:' +this.value +' - '+ $(this).next().find('.media_valor').html());
+		  	cotacoes = cotacoes +this.value+',';
+		  	valor_atual=parseFloat($(this).next().find('.media_valor').html().replace("," , ".")).toFixed(4);
+			soma_valor +=parseFloat(valor_atual);
+			console.log('Valor Atual: '+valor_atual);
+			console.log('Soma Valor: '+soma_valor);
+
+		}).get();
+
+		console.log('Soma Valor Fora: '+ parseFloat(0/0) );
+
+		media_valor=parseFloat(soma_valor/$(this).parent().parent().find('input:checkbox:checked').length);
+
+		if(isNaN(media_valor) == true) media_valor=0;
+
+		valor_total=parseFloat(media_valor*qtde_itens);
+
+		if(isNaN(valor_total) == true) valor_total=0;
+
+		console.log('Length valor: '+$(this).parent().parent().find('input:checkbox:checked').length);
+		console.log('Média valor: '+media_valor);
+		console.log('Valor Total: '+valor_total);
+
+		$('.item_' + id_evento_item + ' .valor_unitario').html(media_valor.toLocaleString('pt-br',{style: 'currency', currency: 'BRL'}));
+		$('.item_' + id_evento_item + ' .valor_total').html(valor_total.toLocaleString('pt-br',{style: 'currency', currency: 'BRL'}));
+
+		console.log(media_valor);
+
+		// salva o orçamento selecionado e atualiza valores médios dos itens
+		$.ajaxSetup({
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="_token"]').attr('content')
+            }
+        })
+        var formData = {
+            //id_item: id_evento_item,
+            id_evento: $('#frm_evento input[name="id_evento"]').val(),
+            id_usuario: $('#frm_evento input[name="id_usuario"]').val(),
+            //qtde: '1',
+            cotacoes: cotacoes,
+            valor_unitario: media_valor,
+            valor_total: valor_total,
+            _token: $('#frm_evento input[name="_token"]').val()
+        }
+        var state = 'put';
+        var type = "POST";
+        var my_url = '{{route("cliente.eventos.item.atualizar")}}/'+id_evento_item;
+        $.ajax({
+            type: type,
+            url: my_url,
+            data: formData,
+            dataType: 'json',
+            success: function (data) {
+            	console.log('iten atualizado com sucesso');
+            },
+            error: function (data3) {
+                console.log('Error:', data3);
+            }
+        });        
+    });
   	
 
 
@@ -904,6 +1395,7 @@
 		            id_item: suggestion.data,
 		            id_evento: $('#frm_evento input[name="id_evento"]').val(),
 		            id_usuario: $('#frm_evento input[name="id_usuario"]').val(),
+		            qtde: '1',
 		            _token: $('#frm_evento input[name="_token"]').val()
 		        }
 		        //used to determine the http verb to use [add=POST], [update=PUT]
@@ -925,30 +1417,119 @@
 		                if( $('#table_evento_itens .no_item').length > 0 ) $( "#table_evento_itens .no_item" ).remove();
 		                if( $('#table_evento_itens_tr .no_item').length > 0 ) $( "#table_evento_itens_tr .no_item" ).remove();
 
-		                // adiciona itens na tabela de itens
+		                var x=$('#itens-list').length + 1;
+
+		                var rowCount = $('#itens-list tr').length + 1;
+
+		                console.log($('#itens-list').length);
+
+		                 // adiciona itens na tabela de itens // data.codigo 
 		                var item = '<tr class="item_' + data.idItem + '">';
-						 item += '	    <td><b>' + data.codigo + '</b><br><center><a  id="' + data.idItem + '" class="excluir_item tooltipped" data-position="bottom" data-delay="0" data-tooltip="Excluir item do evento" href={{url("cliente/eventos/itens/deletar")}}/' + data.idItem + '  onclick="return false;"><i class="material-icons red-text">delete_forever</i></a></center></td>';
+						 item += '	    <td><center><b>' + rowCount + '</b><br><a  id="' + data.idItem + '" class="excluir_item tooltipped" data-position="bottom" data-delay="0" data-tooltip="Excluir item do evento" href={{url("cliente/eventos/itens/deletar")}}/' + data.idItem + '  onclick="return false;"><i class="material-icons red-text">delete_forever</i></a></center></td>';
 						 item += '	    <td>' + data.descricao + '</td>';
 						 item += '	    <td>' + data.unidade + '</td>';
-						 item += '	    <td>';
+						 item += '	    <td data-idItem="' + data.idItem + '">';
 						 item += '	    	<div class="input-field">';
-						 item += '		          <input type="text" name="pregao" value="' + data.qtde + '">';
+						 item += '		          <input type="number" class="qtde" name="qtde" value="1">';
 						 item += '		          <label>Quantidade</label>';
 						 item += '		    </div>';
 			             item += '      </td>';
-						 item += '	    <td></td>';
-						 item += '	    <td></td>';
-						 item += '	    <td></td>';
+						 item += '	    <td class="valor_unitario">R$ 0,00</td>';
+						 item += '	    <td class="valor_total">R$ 0,00</td>';
+						 item += '	    <td class="lista_orcamentos" data-idItem="' + data.idItem + '"></td>';
 						 item += '</tr>';		                 
 		                $('#itens-list').prepend(item);
 
+		                /*
 		                // adiciona itens na tabela de trs
+		                */
 		                var item = '<tr class="item_' + data.idItem + '">';
-						 item += '	    <td><b>' + data.codigo + '</b></td>';
+						 item += '	    <td><b>' + rowCount + '</b></td>';
 						 item += '	    <td>' + data.descricao + '</td>';
 						 item += '	    <td class="trs"></td>';
 						 item += '</tr>';		                 
-		                $('#itens-list-tr').prepend(item);
+		                //$('#itens-list-tr').prepend(item);
+		                $('#itens-list-tr').append(item);  
+
+		                /*
+		                // adiciona itens na tabela de revisão de itens
+		                */
+		                var item = '<tr class="item_' + data.idItem + '">';
+						 item += '	    <td><b>' + rowCount + '</b></td>';
+						 item += '	    <td>' + data.descricao + '</td>';
+						 item += '	    <td>' + data.unidade + '</td>';
+						 item += '	    <td>' + data.qtde + '</td>';
+						 item += '	    <td>' + data.valor_unitario.toLocaleString('pt-br',{style: 'currency', currency: 'BRL'}) + '</td>';
+						 item += '	    <td>' + data.valor_total.toLocaleString('pt-br',{style: 'currency', currency: 'BRL'}) + '</td>';
+						 item += '</tr>';		                 
+		                //$('#itens-list-tr').prepend(item);
+		                $('#itens-list-tr-revisao').append(item);  
+
+		                var row_id_item=data.idItem;
+		                 // faz pesquisa de quais TRs pertencem a esse ITEM
+				        $.ajaxSetup({
+				            headers: {
+				                'X-CSRF-TOKEN': $('meta[name="_token"]').attr('content')
+				            }
+				        })
+				        var formData3 = {
+				            id_item: data.codigo,
+				            _token: $('#frm_evento input[name="_token"]').val()
+				        }
+		                $.ajax({
+				            type: 'POST',
+				            url: '{{route("admin.orcamentos.listar")}}',
+				            data: formData3,
+				            dataType: 'json',
+				            success: function (data3) {
+				            	console.log(data3)
+
+				            	var soma_valor=0;
+				            	var media_valor=0;
+
+				            	// insere tr na tabela de itens
+				            	$.each(data3, function() {
+				            		console.log(this.orgao);
+				            		valor_atual=parseFloat(this.valor).toFixed(2);
+				            		soma_valor +=parseFloat(valor_atual);
+									console.log(soma_valor);
+								     
+								     $('.item_' + row_id_item + ' .lista_orcamentos').append('<p><input type="checkbox" name="orcamento[]" value="'+ this.id +'" id="orcamento_'+ this.id +'" /><label for="orcamento_'+ this.id +'"> <span class=media_valor>'+valor_atual.toLocaleString('pt-br',{style: 'currency', currency: 'BRL'})+'</span></label></p><br> ');
+								     //$('.item_' + row_id_item + ' .lista_orcamentos').append('<p><input type="checkbox" name="orcamento[]" value="'+ this.id +'" id="orcamento_'+ this.id +'" /><label for="orcamento_'+ this.id +'">'+this.orgao+' - <span class=media_valor>'+valor_atual.toLocaleString('pt-br',{style: 'currency', currency: 'BRL'})+'</span></label></p><br> ');
+
+								});
+
+
+								media_valor=parseFloat(soma_valor/data3.length);
+
+								//$('.item_' + row_id_item + ' .valor_unitario').append('<center>'+media_valor.toLocaleString('pt-br',{style: 'currency', currency: 'BRL'})+'</center>');
+								//$('.item_' + row_id_item + ' .valor_total').append('<center>'+media_valor.toLocaleString('pt-br',{style: 'currency', currency: 'BRL'})+'</center>');
+								$('.item_' + row_id_item + ' .lista_orcamentos').append('<p class="right-align grey-text" style="display: none; border-top: 1px solid #999;">Média - <span class="valor_total">R$ 0,00</span></p>'); //'+media_valor.toLocaleString('pt-br',{style: 'currency', currency: 'BRL'})+'
+								console.log('opa qtde');
+								$('.item_' + row_id_item + ' .qtde').focus();
+								$('select').material_select();
+				               
+				            },
+				            error: function (data3) {
+				                console.log('Error:', data3);
+				            }
+				        });
+
+
+
+
+
+
+		               
+
+
+
+
+
+
+
+
+
 
 		                
 		                // faz pesquisa de quais TRs pertencem a esse ITEM
@@ -1096,6 +1677,17 @@
 		    }
 	})
 
+
+function formatReal( int )
+{
+        var tmp = int+'';
+        tmp = tmp.replace(/([0-9]{2})$/g, ",$1");
+        if( tmp.length > 6 )
+                tmp = tmp.replace(/([0-9]{3}),([0-9]{2}$)/g, ".$1,$2");
+
+        return tmp;
+}
+
 function intersection2() {
   var result = [];
   var lists;
@@ -1228,34 +1820,60 @@ function intersection(arrayOfArrays) {
         var id_tr_atual=$('#id_tr_atual').val();
         var id_tr_selecionado =$('input[name=id_tr]:checked').val();
         console.log(id_tr_atual+' - '+id_tr_selecionado);
-        // verifica se mudou o TR
-        if(id_tr_atual != id_tr_selecionado){
-        	console.log('alterar tr');
-        	if(confirm("Você selecionou um novo TR, ao clicar em salvar o TR antigo será substituido pelo novo TR escolhido. Deseja continuar?")){
 
-        		// muda id selecionado
-        		$('#id_tr_atual').val(id_tr_selecionado);
+        var etapa=$(this).attr('id');
+        console.log('etapa:'+etapa);
+        //btn_formulario_cpl
 
-        		// pega novo TR
-        		$.ajax({
-	                  type:"GET",
-	                  url:'{{ route("admin.termos-referencia.mostrar") }}/'+id_tr_selecionado,
-	                  cache: false,
-	                  processData: false,
-	                  success: function(data){  
-	                  	$('textarea[name=termo_referencia]').val(data[0].termo_referencia);
+       // alert($(this).attr("id"));
 
-	                  	// salva etapas e muda tr se necessário
-        				salvar_etapa({{$registro->id}});
+        // verifica se ainda está na primeira etapa
+        if(typeof id_tr_selecionado != 'undefined'){
 
-	                  },
-	                  error: function(data){   }
-	            })	        		
-        	}
-        }else{
-        	// salva etapas e muda tr se necessário
-        	salvar_etapa({{$registro->id}});
-        }
+		        // verifica se mudou o TR
+		        if(id_tr_atual != id_tr_selecionado){
+		        	console.log('alterar tr');
+		        	if(confirm("Você selecionou um novo TR, ao clicar em salvar o TR antigo será substituido pelo novo TR escolhido. Deseja continuar?")){
+
+		        		// muda id selecionado
+		        		$('#id_tr_atual').val(id_tr_selecionado);
+
+		        		// pega novo TR
+		        		$.ajax({
+			                  type:"GET",
+			                  url:'{{ route("admin.termos-referencia.mostrar") }}/'+id_tr_selecionado,
+			                  cache: false,
+			                  processData: false,
+			                  success: function(data){  
+			                  	console.log(data);
+
+			                  	
+			                  	////console.log(Array.from( editorinstance.ui.componentFactory.names() ));
+
+			                  	$('textarea[name=termo_referencia]').val(data);
+
+			                  	$('textarea[name=termo_referencia]').trumbowyg('html', data);
+
+			                  	////editorinstance.setData(data); 
+
+			                  	// salva etapas e muda tr se necessário
+		        				salvar_etapa('{{$registro->id}}');
+
+			                  }
+			            })	        		
+		        	}
+		        }else{
+		        	// salva etapas e muda tr se necessário
+		        	salvar_etapa('{{$registro->id}}');
+		        }
+
+    	}// fim verifica fim etapa
+
+    	if(etapa=='btn_alteracoes_tr') return false;
+
+
+
+    	//return false;
     });
 
     /*
@@ -1268,10 +1886,64 @@ function intersection(arrayOfArrays) {
           }
         });
         //e.preventDefault(e);
+       // CKEDITOR.instances.SurveyBody.updateElement();
+        //var formData = $('#frm_evento').serialize();
+
+
+        // convert form data to array
+		var data = $("#frm_evento").serializeArray();
+
+		//const data_editor = editor.getData();
+		////const data_editor = editorinstance.getData(); 
+		var data_editor = $('textarea[name=termo_referencia]').trumbowyg('html');
+		data.find(item => item.name === 'termo_referencia').value = data_editor;
+
+
+		var garantia_contratual_status = $("input[name=garantia_contratual]").prop('checked');
+		if (typeof data.find(item => item.name === 'garantia_contratual')  === "undefined") {
+			//data.push({name: 'garantia_contratual', value: garantia_contratual});
+		}else{
+			data.find(item => item.name === 'garantia_contratual').value = garantia_contratual_status;
+		}
+
+
+
+		var destinada_srp_status = $("input[name=destinada_srp]").prop('checked');
+		if (typeof data.find(item => item.name === 'destinada_srp')  === "undefined") {
+			//data.push({name: 'destinada_srp', value: destinada_srp_status});
+		}else{
+			data.find(item => item.name === 'destinada_srp').value = destinada_srp_status;
+		}
+
+		var exclusiva_me_epp_status = $("input[name=exclusiva_me_epp]").prop('checked');
+		if (typeof data.find(item => item.name === 'exclusiva_me_epp')  === "undefined") {
+			//data.push({name: 'destinada_srp', value: destinada_srp_status});
+		}else{
+			data.find(item => item.name === 'exclusiva_me_epp').value = exclusiva_me_epp_status;
+		}
+
+		var itens_exclusivos_me_epp_status = $("input[name=itens_exclusivos_me_epp]").prop('checked');
+		if (typeof data.find(item => item.name === 'itens_exclusivos_me_epp')  === "undefined") {
+			//data.push({name: 'destinada_srp', value: destinada_srp_status});
+		}else{
+			data.find(item => item.name === 'itens_exclusivos_me_epp').value = itens_exclusivos_me_epp_status;
+		}
+
+		
+		// OR using ES5
+		/*data.forEach(function (item) {
+		  if (item.name === 'entry[body]') {
+		    item.value = "something else";
+		  }
+		});*/
+
+
+
+
         $.ajax({
 	          type:"POST",
 	          url:'{{route("cliente.eventos.atualizar")}}/'+id,
-	          data:$('#frm_evento').serialize(),
+	          data: $.param(data),
 	          dataType: 'json',
 	          cache: false,
 	          processData: false,
@@ -1284,7 +1956,10 @@ function intersection(arrayOfArrays) {
 
 
 	          },
-	          error: function(data){   }
+	          error: function(data){  
+	          	var $toastContent = $('<span>ERRO PARA SALVAR ESTA ETAPA, CONTACTE O ADMINISTRADOR DO SISTEMA. </span>').add($('<button onclick="Materialize.Toast.removeAll();" class="btn-flat toast-action">X</button>'));
+	            Materialize.toast($toastContent, 5000);  	          	
+	          }
         })
     }
 
@@ -1293,7 +1968,9 @@ function intersection(arrayOfArrays) {
     * Esta função monta um TR para revisão, substituindo as variaveis
     */
     function montar_tr_revisao(id){
-        $.ajax({
+    	console.log('motando tr'+id);
+    	$('#termo_referencia_revisao').attr('src','{{route("cliente.eventos.verTermoReferencia")}}/'+id);
+        /*$.ajax({
               type:"GET",
               url:'{{ route("cliente.eventos.montar_tr") }}/'+id,
               cache: false,
@@ -1302,7 +1979,7 @@ function intersection(arrayOfArrays) {
               	$('#termo_referencia_revisao').val(data);
               },
               error: function(data){   }
-          })
+          })*/
     }
 
 
@@ -1323,6 +2000,53 @@ function intersection(arrayOfArrays) {
 	  	$("#embasamento_legal").show();
 	  }else{
 	  	$("#embasamento_legal").hide();
+	  	$("textarea[name=embasamento_legal]").val('');
+	  }
+	})
+
+	/*
+    * Este método mostra embasamento legal dependendo do tipo de modalidade
+    */
+	$("#exclusiva_me_epp").on("click",function() {
+		
+	  var status = $("input[name=exclusiva_me_epp]").prop('checked');
+	  console.log(status);
+	  if( status == true){
+	  	
+	  	$("#box_itens_exclusivos_me_epp").hide();
+	  	$( "input[name=itens_exclusivos_me_epp]" ).prop( "checked", false );
+	  }else{
+	  	$("#box_itens_exclusivos_me_epp").show();
+	  }
+	})
+
+	/*
+    * Este método mostra a prazo para vigência se marcado destinado ao SRP
+    */
+	$("#destinada_srp").on("click",function() {
+		
+	  var status = $("input[name=destinada_srp]").prop('checked');
+	  console.log(status);
+	  if( status == true){
+	  	$("#box_prazo_vigencia_ata").show();
+	  }else{
+	  	$("#box_prazo_vigencia_ata").hide();
+	  	$( "input[name=prazo_vigencia_ata]" ).val('');
+	  }
+	})
+
+	/*
+    * Este método mostra a porcentagem caso seja exigida garantia contratual
+    */
+	$("#garantia_contratual").on("click",function() {
+		
+	  var status = $("input[name=garantia_contratual]").prop('checked');
+	  console.log(status);
+	  if( status == true){
+	  	$("#box_porcentagem_garantia").show();
+	  }else{
+	  	$("#box_porcentagem_garantia").hide();
+	  	$( "input[name=porcentagem_garantia]" ).val('');
 	  }
 	})
 

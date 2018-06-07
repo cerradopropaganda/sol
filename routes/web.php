@@ -89,6 +89,14 @@ Route::group(array('prefix' => '/cliente', 'middleware' =>  ['auth']), function(
 	Route::get('/fiscais/editar/{id?}', ['as'=>'cliente.fiscais.editar','uses'=>'Cliente\FiscalController@editar']);
 	Route::put('/fiscais/atualizar/{id?}', ['as'=>'cliente.fiscais.atualizar','uses'=>'Cliente\FiscalController@atualizar']);
 	Route::get('/fiscais/deletar/{id?}', ['as'=>'cliente.fiscais.deletar','uses'=>'Cliente\FiscalController@deletar']);
+
+	/* ROTAS PREGOEIRO - CLIENTE */
+	Route::get('/pregoeiros',['as' => 'cliente.pregoeiros','uses'=>'Cliente\PregoeiroController@index']);
+	Route::get('/pregoeiros/adicionar',['as' => 'cliente.pregoeiros.adicionar','uses'=>'Cliente\PregoeiroController@adicionar']);
+	Route::post('/pregoeiros/salvar', ['as'=>'cliente.pregoeiros.salvar','uses'=>'Cliente\PregoeiroController@salvar']);
+	Route::get('/pregoeiros/editar/{id?}', ['as'=>'cliente.pregoeiros.editar','uses'=>'Cliente\PregoeiroController@editar']);
+	Route::put('/pregoeiros/atualizar/{id?}', ['as'=>'cliente.pregoeiros.atualizar','uses'=>'Cliente\PregoeiroController@atualizar']);
+	Route::get('/pregoeiros/deletar/{id?}', ['as'=>'cliente.pregoeiros.deletar','uses'=>'Cliente\PregoeiroController@deletar']);
 	
 	/* ROTAS LOGOMARCA E CABEÇALHO - CLIENTE */
 	Route::get('/header',['as' => 'cliente.header','uses'=>'Cliente\HeaderController@index']);
@@ -109,19 +117,24 @@ Route::group(array('prefix' => '/cliente', 'middleware' =>  ['auth']), function(
 	Route::get('/eventos/adicionar',['as' => 'cliente.eventos.adicionar','uses'=>'Cliente\EventoController@adicionar']);
 	Route::post('/eventos/salvar', ['as'=>'cliente.eventos.salvar','uses'=>'Cliente\EventoController@salvar']);
 	Route::get('/eventos/fase_inicial_editar/{id?}', ['as'=>'cliente.eventos.fase_inicial_editar','uses'=>'Cliente\EventoController@fase_inicial_editar']);
+	Route::get('/eventos/fase_final_editar/{id?}',['as' => 'cliente.eventos.fase_final_editar','uses'=>'Cliente\EventoController@fase_final_editar']);
 	Route::get('/eventos/fase_final',['as' => 'cliente.eventos.fase_final','uses'=>'Cliente\EventoController@fase_final']);
 	Route::get('/eventos/concluidos',['as' => 'cliente.eventos.concluidos', 'uses'=>'Cliente\EventoController@concluidos']);
 	Route::post('/eventos/atualizar/{id?}', ['as'=>'cliente.eventos.atualizar','uses'=>'Cliente\EventoController@atualizar']);
 	Route::get('/eventos/deletar/{id?}', ['as'=>'cliente.eventos.deletar','uses'=>'Cliente\EventoController@deletar']);
-	Route::get('/eventos/fase_final_editar/{id?}',['as' => 'cliente.eventos.fase_final_editar','uses'=>'Cliente\EventoController@fase_final_editar']);
+	
 
-
+	// geraão de documentos
 	Route::get('/eventos/montar_tr/{id?}',['as' => 'cliente.eventos.montar_tr','uses'=>'Cliente\EventoController@montar_tr']);
+	Route::get('/eventos/{id?}/gerarDocumento/{id_documento?}',['as' => 'cliente.eventos.gerarDocumento','uses'=>'Cliente\EventoController@gerarDocumento']);
+	Route::get('/eventos/{id?}/Edital/{id_edital?}',['as' => 'cliente.eventos.gerarEdital','uses'=>'Cliente\EventoController@gerarEdital']);
+	Route::get('/eventos/{id?}/TermoReferencia',['as' => 'cliente.eventos.gerarTermoReferencia','uses'=>'Cliente\EventoController@gerarTermoReferencia']);
+	Route::get('/eventos/ShowTermoReferencia/{id?}',['as' => 'cliente.eventos.verTermoReferencia','uses'=>'Cliente\EventoController@verTermoReferencia']);
 
 	Route::get('/eventos/itens/search',['as' => 'cliente.eventos.itens.search','uses'=>'Admin\ItemController@search']);
 	Route::post('/eventos/itens/salvar',['as' => 'cliente.eventos.item.salvar','uses'=>'Cliente\EventoItemController@salvar']);
 	Route::post('/eventos/itens/trs',['as' => 'cliente.eventos.itens.trs','uses'=>'Admin\TermoReferenciaController@listartritens']);
-
+	Route::post('/eventos/itens/atualizar/{id?}', ['as'=>'cliente.eventos.item.atualizar','uses'=>'Cliente\EventoItemController@atualizar']);
 	Route::get('/eventos/itens/deletar/{id?}', ['as'=>'cliente.eventos.item.deletar','uses'=>'Cliente\EventoItemController@deletar']);
 	//Route::post('/eventos/itens/salvar',['as' => 'cliente.eventos.item.salvar', function(Request $request){
 	    //$EventoItem = EventoItem::salvar($request->all());
@@ -199,7 +212,11 @@ Route::prefix('admin')->group(function() {
 	Route::get('/itens/dropdown/{id}', function($id){ $itens_categorias = App\ItemCategoria::where('id_tipo', $id)->get();	return $itens_categorias->pluck('nome', 'id');});
 
 	/* ROTAS ORÇAMENTOS - ADMIN */
-	Route::get('/orcamentos',['as' => 'admin.orcamentos', function () {    				return view('admin.orcamentos.index');	}]);
+	Route::post('/orcamentos/salvar_csv', ['as'=>'admin.orcamentos.salvar_csv','uses'=>'Admin\OrcamentoController@salvar_csv']);
+	Route::post('/orcamentos/listar',['as' => 'admin.orcamentos.listar','uses'=>'Admin\OrcamentoController@listar']);
+
+
+	Route::get('/orcamentos/{id?}',['as' => 'admin.orcamentos', 'uses'=>'Admin\OrcamentoController@index']);
 	Route::get('/orcamentos/adicionar',['as' => 'admin.orcamentos.adicionar',  function () {   		return view('admin.orcamentos.adicionar');	}]);
 	Route::post('/orcamentos/salvar', ['as'=>'admin.orcamentos.salvar','uses'=>'Admin\OrcamentoController@salvar']);
 	Route::get('/orcamentos/editar/{id?}', ['as'=>'admin.orcamentos.editar','uses'=>'Admin\OrcamentoController@editar']);

@@ -41,14 +41,14 @@
                     </div>
               @endif
               
-               <!--<a href="{{ route('admin.usuarios.adicionar') }}" class="btn-floating btn-large left waves-effect waves-light blue" ><i class="material-icons left">add</i></a>-->
-               <a href="{{route('admin.documentos.adicionar')}}" class="btn-floating halfway-fab btn-large left waves-effect waves-light blue" ><i class="material-icons left">add</i></a>           
+               
+               <!--<a href="{{route('admin.documentos.adicionar')}}" class="btn-floating halfway-fab btn-large left waves-effect waves-light blue" ><i class="material-icons left">add</i></a>           -->
               <table class="dataTable responsive-table highlight striped">
                 <thead>
                   <tr>
                     <th width="5%">Editar</th>
                     <th width="90%">NOME</th>
-                    <th width="5%">Excluir</th>
+                    <!--<th width="5%">Excluir</th>-->
                   </tr>
                 </thead>
                 <tbody>
@@ -58,9 +58,9 @@
                           <a href="{{ route('admin.documentos.editar',$registro->id) }}" class="btn-floating waves-effect waves-light grey lighten-1"><i class="material-icons">create</i></a>
                         </td>
                         <td><b>{{ $registro->nome }}</b></td>
-                        <td>
+                        <!--<td>
                           <a href="{{ route('admin.documentos.deletar',$registro->id) }}" class="delete btn-floating waves-effect waves-light grey lighten-1"><i class="material-icons">delete_forever</i></a>
-                        </td>
+                        </td>-->
                       </tr>
                   @endforeach
 

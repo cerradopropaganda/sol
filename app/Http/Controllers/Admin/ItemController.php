@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Item;
+use App\Orcamento;
 use App\ItemTipo;
 use App\ItemCategoria;
 use App\EventoItem;
@@ -16,8 +17,16 @@ class ItemController extends Controller
     public function index(){
 
         $registros = Item::all();
+        $orcamentos= Orcamento::all(array('id_item'));
 
-    	return view('admin.itens.index', compact('registros'));
+        //$registros = Item::join('orcamentos', 'orcamentos.id_item', '=', 'itens.codigo')->orderBy('itens.id', 'DESC')->get(['itens.cat_mat AS item_cat_mat', 'itens.unidade AS item_unidade', 'orcamentos.*']);
+
+
+
+
+        //$orcamentos = Orgao::WHERE('id_usuario', $registro['codigo'])->get(); 
+
+    	return view('admin.itens.index', compact('registros','orcamentos'));
     }
 
     public function adicionar(){
@@ -89,8 +98,14 @@ class ItemController extends Controller
 
         if($req->hasFile('file_csv')){
             $arquivo_csv= $req->file('file_csv');
+            $id_item=pathinfo($arquivo_csv->getClientOriginalName(), PATHINFO_FILENAME);
             $num=rand(1111,9999);
-            $dir= "img/csv_temp";
+            //$dir= "img/itens_csv_temp";
+            $dir= "img/itens_csv_temp/$id_item/";
+            // check is directory exist
+            if (!file_exists($dir)) {
+                mkdir($dir, 0777, true);
+            }
             $ext= $arquivo_csv->guessClientExtension();
             $nome_imagem="csv_".$num.".".$ext;
             $arquivo_csv->move($dir,$nome_imagem);

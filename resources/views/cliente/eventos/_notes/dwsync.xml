@@ -5,12 +5,14 @@
 <file name="especificar_itens.blade.php" server="ftp.cerradopropaganda.com/public_html/dev/sistemaPrefeituras/" local="131641514374056606" remote="131668199400000000" Dst="1" />
 <file name="concluidos.blade.php" server="ftp.cerradopropaganda.com/public_html/dev/sistemaPrefeituras/" local="131653562336713640" remote="131668199400000000" Dst="1" />
 <file name="fase_final.blade.php" server="ftp.cerradopropaganda.com/public_html/dev/sistemaPrefeituras/" local="131653566875004273" remote="131668199400000000" Dst="1" />
-<file name="fase_inicial.blade.php" server="ftp.cerradopropaganda.com/public_html/dev/sistemaPrefeituras/" local="131653555406743789" remote="131668199400000000" Dst="1" />
-<file name="fase_final_editar.blade.php" server="ftp.cerradopropaganda.com/public_html/dev/sistemaPrefeituras/" local="131654394905996485" remote="131668199400000000" Dst="1" />
-<file name="fase_inicial_editar.blade.php" server="ftp.cerradopropaganda.com/public_html/dev/sistemaPrefeituras/" local="131660443945152679" remote="131668199400000000" Dst="1" />
+<file name="fase_inicial.blade.php" server="ftp.cerradopropaganda.com/public_html/dev/sistemaPrefeituras/" local="131690697888449886" remote="131691617400000000" Dst="1" />
+<file name="fase_final_editar.blade.php" server="ftp.cerradopropaganda.com/public_html/dev/sistemaPrefeituras/" local="131708928900868937" remote="131709726600000000" Dst="1" />
+<file name="fase_inicial_editar.blade.php" server="ftp.cerradopropaganda.com/public_html/dev/sistemaPrefeituras/" local="131690698106582622" remote="131691617400000000" Dst="1" />
 <file name="concluidos_download.blade.php" server="ftp.cerradopropaganda.com/public_html/dev/sistemaPrefeituras/" local="131641514374046950" remote="131668199400000000" Dst="1" />
-<file name="adicionar.blade.php" server="ftp.cerradopropaganda.com/public_html/dev/sistemaPrefeituras/" local="131653540205922597" remote="131668199400000000" Dst="1" />
+<file name="adicionar.blade.php" server="ftp.cerradopropaganda.com/public_html/dev/sistemaPrefeituras/" local="131709778552379745" remote="131709781800000000" Dst="1" />
 <file name="_form.blade_ANTIGO.php" server="ftp.cerradopropaganda.com/public_html/dev/sistemaPrefeituras/" local="131641514373946503" remote="131668199400000000" Dst="1" />
-<file name="_formInicial.blade.php" server="ftp.cerradopropaganda.com/public_html/dev/sistemaPrefeituras/" local="131667458192585970" remote="131668199400000000" Dst="1" />
-<file name="_formFinal.blade.php" server="ftp.cerradopropaganda.com/public_html/dev/sistemaPrefeituras/" local="131660516301098476" remote="131668199400000000" Dst="1" />
+<file name="_formInicial.blade.php" server="ftp.cerradopropaganda.com/public_html/dev/sistemaPrefeituras/" local="131709774776009096" remote="131709781800000000" Dst="1" />
+<file name="_formFinal.blade.php" server="ftp.cerradopropaganda.com/public_html/dev/sistemaPrefeituras/" local="131708929625015921" remote="131709726600000000" Dst="1" />
+<file name="gerarDocumento.blade.php" server="ftp.cerradopropaganda.com/public_html/dev/sistemaPrefeituras/" local="131673233399885337" remote="131680400400000000" Dst="1" />
+<file name="gerarTermoReferencia.blade.php" server="ftp.cerradopropaganda.com/public_html/dev/sistemaPrefeituras/" local="131691535320031232" remote="131691617400000000" Dst="1" />
 </dwsync>

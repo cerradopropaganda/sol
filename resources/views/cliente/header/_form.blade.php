@@ -1,6 +1,6 @@
 <div class="row">
 	
-	<div class="col s7 m7">
+	<div class="col s9 m9">
 
 		<div class="input-field">
 		    <select name="id_orgao">
@@ -32,7 +32,10 @@
 
 
       <label><H6>CABEÇALHO</H6></label>
-      <textarea class="" style="height: 600px;" name="cabecalho">   </textarea>
+      <textarea class="editor" style="height: 300px;" name="cabecalho">   </textarea>
+
+      <label><H6>RORDAPÉ</H6></label>
+      <textarea class="editor" style="height: 300px;" name="cabecalho">   </textarea>
 
 
 	</div>
@@ -52,6 +55,11 @@
 
 @section('page-script')
 <script type="text/javascript">
+
+    /*
+    * Este método inicia o editor TRHUMBYG
+    */
+    $('.editor').trumbowyg();
 
     /*
     * Este método valida o formulário

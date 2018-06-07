@@ -40,6 +40,13 @@
                         <p class="white-text"> <i class="inline-icon material-icons">check_circle</i> {{ $message }}</p>
                     </div>
               @endif
+
+              <!-- MOSTRAR MENSAGEM DE ERRO -->
+              @if ($message = Session::get('error'))
+                    <div id="msg_erro" class="card-panel red lighten-2">
+                        <p class="white-text"> <i class="inline-icon material-icons">priority_high</i> {{ $message }}</p>
+                    </div>
+              @endif
               
                <!--<a href="{{ route('admin.usuarios.adicionar') }}" class="btn-floating btn-large left waves-effect waves-light blue" ><i class="material-icons left">add</i></a>-->
               <a href="{{route('admin.itens.adicionar')}}" class="btn-floating halfway-fab btn-large left waves-effect waves-light blue" ><i class="material-icons left">add</i></a>           
@@ -69,7 +76,74 @@
                         <td>{{ $registro->descricao }}</td>
                         <td>{{ $registro->unidade }}</td>
                         <td>{{ $registro->el_despesa }}</td>
-                        <td></td>
+                        <td>
+                          <center>
+                            <h5>{{ $count = $orcamentos->where('id_item', $registro->codigo)->count() }}</h5> 
+                            <a href="#modal_import_csv_orcamentos_{{ $registro->codigo }}" class="btn waves-effect waves-light blue modal-trigger">Add Orçamento</a>
+                            <a style="margin-top: 10px;" href="{{route('admin.orcamentos',$registro->codigo)}}" class="btn waves-effect waves-light grey">Visualizar</a>
+                          </center>
+
+
+                            <!-- Modal import orçamentos csv -->
+                            <div id="modal_import_csv_orcamentos_{{ $registro->codigo }}" class="modal" style="width: 600px;">
+                              
+
+                                <div class="card " style="margin:0;">
+
+
+                                      <div class="card-content blue" style="padding: 10px 25px;">
+
+                                          <h5 class="card-title  white-text">Importar Orçamentos para este item</h5>
+                                         
+                                      </div>
+                                      
+                                      <div class="card-content white">
+
+                                        
+
+                                        <form id="frm_orcamentos_csv" class="" method="post" action="{{ route('admin.orcamentos.salvar_csv')}}" enctype="multipart/form-data">
+                                            {{ csrf_field() }}
+                                            <div class="row">
+                                            <div class="col s12">
+
+                                              <p>Anexe o arquivo .CSV com os orçamentos para este item e clique em importar</p>
+                                              <div class="file-field input-field">
+                                                  <div class="btn  blue darken-1">
+                                                    <span>ARQUIVO .CSV</span>
+                                                    <input type="file"  name="file_csv">
+                                                  </div>
+                                                  <div class="file-path-wrapper">
+                                                    <input class="file-path validate" type="text">
+                                                  </div>
+                                              </div>
+                                              <br><br>
+                                              <input type="hidden" name="id_item" id="id_item" value="{{ $registro->codigo }}">
+                                              <button class="btn right blue darken-1">Importar Orçamentos</button>      
+                                              <br><br>
+
+
+
+                                            </div>
+                                            </div>
+                                        
+                                        </form>
+                                      </div>
+
+                                </div>
+                            </div>
+
+
+
+
+
+
+
+
+
+
+
+
+                        </td>
                         <td>
                           <a href="{{ route('admin.itens.deletar',$registro->id) }}" class="delete btn-floating waves-effect waves-light grey lighten-1"><i class="material-icons">delete_forever</i></a>
                         </td>
@@ -180,7 +254,7 @@
                         </div>
                     </div>
                     <br><br>
-                    <button class="btn right blue darken-1">Importar</button>      
+                    <button class="btn right blue darken-1">Importar Itens</button>      
                     <br><br>
 
 
@@ -193,6 +267,9 @@
 
       </div>
   </div>
+
+
+
 @endsection
 
 @section('page-script')
@@ -204,5 +281,7 @@
 
 
   });
+
+
 </script>
 @endsection

@@ -50,11 +50,7 @@
                         @include('cliente.eventos._formFinal')
 
 
-                        <input type="hidden" name="id_usuario" value="@if(Auth::user()->id_usuario==0){{Auth::user()->id}}@else@php
-
-       $registro = Auth::user()->select('id')->where('id',Auth::user()->id_usuario)->get() ; foreach($registro as $user) { echo $user->id ;}
-
-       @endphp@endif">
+                        <input type="hidden" name="id_usuario" value="@if(Auth::user()->id_usuario==0){{Auth::user()->id}}@else {{Auth::user()->id_usuario}} @endif">
 
                       </form>
           

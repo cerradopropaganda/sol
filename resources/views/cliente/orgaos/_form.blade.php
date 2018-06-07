@@ -29,9 +29,9 @@
 			</div>
 
 			<div class="col s3">
-			      <input name="ordenador_sexo"  {{ $registro->ordenador_sexo == 'masculino' ? 'checked' : '' }}  type="radio" id="ordenador_sexo_masculino" value="masculino" checked="checked" />
+			      <input name="ordenador_sexo"  {{ isset($registro->ordenador_sexo) && $registro->ordenador_sexo == 'masculino' ? 'checked' : '' }}  type="radio" id="ordenador_sexo_masculino" value="masculino" checked="checked" />
 			      <label for="ordenador_sexo_masculino">Masculino</label>
-			      <input name="ordenador_sexo" {{ $registro->ordenador_sexo == 'feminino' ? 'checked' : '' }} type="radio" id="ordenador_sexo_feminino"  value="feminino" />
+			      <input name="ordenador_sexo" {{ isset($registro->ordenador_sexo) && $registro->ordenador_sexo == 'feminino' ? 'checked' : '' }} type="radio" id="ordenador_sexo_feminino"  value="feminino" />
 			      <label for="ordenador_sexo_feminino">Feminino</label>
 			</div>
 
@@ -43,40 +43,31 @@
 		</div>
 
 		<div class="input-field">
-			<input type="text" name="diligente_tipo" value="{{isset($registro->diligente_tipo) ? $registro->diligente_tipo : ''}}">
+			<input type="text" name="dirigente_tipo" value="{{isset($registro->dirigente_tipo) ? $registro->dirigente_tipo : ''}}">
 			<label>TIPO DE DIRIGENTE DO ÓRGÃO SOLICITANTE</label>
 		</div>
 
 		<div class="row">
 			
 			<div class="input-field  col s9">
-				<input type="text" name="diligente_nome" value="{{isset($registro->diligente_nome) ? $registro->diligente_nome : ''}}">
+				<input type="text" name="dirigente_nome" value="{{isset($registro->dirigente_nome) ? $registro->dirigente_nome : ''}}">
 				<label>NOME DO DIRIGENTE DO ÓRGÃO SOLICITANTE</label>
 			</div>
 
 			<div class="col s3">
-			      <input name="diligente_sexo"  {{ $registro->diligente_sexo == 'masculino' ? 'checked' : '' }}  type="radio" id="diligente_sexo_masculino" value="masculino" checked="checked" />
-            <label for="diligente_sexo_masculino">Masculino</label>
-            <input name="diligente_sexo" {{ $registro->diligente_sexo == 'feminino' ? 'checked' : '' }} type="radio" id="diligente_sexo_feminino"  value="feminino" />
-            <label for="diligente_sexo_feminino">Feminino</label>
+			      <input name="dirigente_sexo"  {{ isset($registro->dirigente_sexo) && $registro->dirigente_sexo == 'masculino' ? 'checked' : '' }}  type="radio" id="dirigente_sexo_masculino" value="masculino" checked="checked" />
+            <label for="dirigente_sexo_masculino">Masculino</label>
+            <input name="dirigente_sexo" {{ isset($registro->dirigente_sexo) && $registro->dirigente_sexo == 'feminino' ? 'checked' : '' }} type="radio" id="dirigente_sexo_feminino"  value="feminino" />
+            <label for="dirigente_sexo_feminino">Feminino</label>
 			</div>
 
 		</div>
 
 		<div class="input-field">
-			<input type="text" class="cpf" name="diligente_cpf" value="{{isset($registro->diligente_cpf) ? $registro->diligente_cpf : ''}}">
+			<input type="text" class="cpf" name="dirigente_cpf" value="{{isset($registro->dirigente_cpf) ? $registro->dirigente_cpf : ''}}">
 			<label>CPF DO DIRIGENTE DO ÓRGÃO SOLICITANTE</label>
 		</div>
 
-		<div class="input-field">
-			<input type="text" name="pregoeiro_nome" value="{{isset($registro->pregoeiro_nome) ? $registro->pregoeiro_nome : ''}}">
-			<label>NOME DO PREGOEIRO</label>
-		</div>
-
-		<div class="input-field">
-			<input type="text" name="ato_designacao" value="{{isset($registro->ato_designacao) ? $registro->ato_designacao : ''}}">
-			<label>ATO DE DESIGNAÇÃO DA COMISSÃO DE LICITAÇÃO</label>
-		</div>
 
 	</div>
 
@@ -141,31 +132,23 @@
                   required: true,
                   minlength: 2
               },
-              diligente_tipo: {
+              dirigente_tipo: {
                   required: true,
                   minlength: 2
               },
-              diligente_nome: {
+              dirigente_nome: {
                   required: true,
                   minlength: 2
               },
-              //diligente_sexo: {
+              //dirigente_sexo: {
               //    required: true
                  // equalTo: "#pass"
               //},
-              diligente_cpf: {
+              dirigente_cpf: {
                   required: true,
                   minlength: 14,
                   maxlength: 14
-              },
-              pregoeiro_nome: {
-                  required: true,
-                  minlength: 2
-              },
-              ato_designacao: {
-                  required: true,
-                  minlength: 2
-              }  
+              }
 
           },
           //For custom messages
@@ -194,18 +177,18 @@
                   required: "Por favor insira um Cargo para o Ordenador",
                   minlength: "Digite mais de 1 caracter"
               },
-              diligente_tipo: {
-                  required: "Por favor escolha um tipo de Diligente",
+              dirigente_tipo: {
+                  required: "Por favor escolha um tipo de dirigente",
                   minlength: "Digite mais de 1 caracter"
               },
-              diligente_nome: {
-                  required: "Por favor insira um Nome para o Diligente",
+              dirigente_nome: {
+                  required: "Por favor insira um Nome para o dirigente",
                   minlength: "Digite mais de 1 caracter"
               },
-             // diligente_sexo: {
-              //    required: "Escolha um sexo para o Diligente"
+             // dirigente_sexo: {
+              //    required: "Escolha um sexo para o dirigente"
               //},
-              diligente_cpf: {
+              dirigente_cpf: {
                   required: "Por favor insira um CPF correto",
                   minlength: "Digite mais de 1 caracter"
               },

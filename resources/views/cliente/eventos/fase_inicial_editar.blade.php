@@ -66,15 +66,3 @@
 </div>
 
 @endsection
-
-
-@section('page-script')
-<script type="text/javascript">
-  $(document).ready(function(){
-    @if ($message = Session::get('success'))
-      $("#msg_sucesso").show().delay(5000).fadeOut();
-      $('.stepper').openStep(2);
-    @endif   
-});
-</script>
-@endsection

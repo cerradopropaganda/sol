@@ -44,7 +44,7 @@
                     <th width="5%">Editar</th>
                     <th width="45%">NOME DO ÓRGÃO</th>
                     <th width="23%">NOME DO ORDENADOR</th>
-                    <th width="22%">NOME DO DILIGENTE</th>
+                    <th width="22%">NOME DO DIRIGENTE</th>
                     <th width="5%">Excluir</th>
                   </tr>
                 </thead>
@@ -57,7 +57,7 @@
                         </td>
                         <td><b>{{ $registro->nome }}</b></td>
                         <td>{{ $registro->ordenador_nome }}</td>
-                         <td>{{ $registro->diligente_nome }}</td>
+                         <td>{{ $registro->dirigente_nome }}</td>
                         <td>
                           <a href="{{ route('cliente.orgaos.deletar',$registro->id) }}" class="delete btn-floating waves-effect waves-light grey lighten-1"><i class="material-icons">delete_forever</i></a>
                         </td>

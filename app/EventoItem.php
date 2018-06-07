@@ -13,7 +13,7 @@ class EventoItem extends Model
     use Notifiable;
     protected $table = 'eventos_itens';
     protected $fillable = [
-        'id_evento','id_usuario', 'id_item', 'qtde', 'cotacoes', 'ordem', 'created_at', 'updated_at'
+        'id_evento','id_usuario', 'id_item','id_lote', 'qtde', 'valor_unitario', 'valor_total', 'cotacoes', 'ordem', 'created_at', 'updated_at'
     ];
 
 

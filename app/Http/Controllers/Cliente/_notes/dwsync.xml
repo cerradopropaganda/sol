@@ -5,7 +5,8 @@
 <file name="LoginController.php" server="ftp.cerradopropaganda.com/public_html/dev/sistemaPrefeituras/" local="131650900624698043" remote="131668198200000000" Dst="1" />
 <file name="OrgaoController.php" server="ftp.cerradopropaganda.com/public_html/dev/sistemaPrefeituras/" local="131662213253782355" remote="131668198200000000" Dst="1" />
 <file name="HeaderController.php" server="ftp.cerradopropaganda.com/public_html/dev/sistemaPrefeituras/" local="131662909070260679" remote="131668198200000000" Dst="1" />
-<file name="EventoController.php" server="ftp.cerradopropaganda.com/public_html/dev/sistemaPrefeituras/" local="131667421696875947" remote="131668198200000000" Dst="1" />
+<file name="EventoController.php" server="ftp.cerradopropaganda.com/public_html/dev/sistemaPrefeituras/" local="131709776854415249" remote="131709781200000000" Dst="1" />
 <file name="UsuarioClienteController.php" server="ftp.cerradopropaganda.com/public_html/dev/sistemaPrefeituras/" local="131662199011712855" remote="131668198200000000" Dst="1" />
 <file name="EventoItemController.php" server="ftp.cerradopropaganda.com/public_html/dev/sistemaPrefeituras/" local="131660447923403198" remote="131668198200000000" Dst="1" />
+<file name="PregoeiroController.php" server="ftp.cerradopropaganda.com/public_html/dev/sistemaPrefeituras/" local="131702587321548715" remote="131702860200000000" Dst="1" />
 </dwsync>

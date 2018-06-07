@@ -12,7 +12,7 @@ class Orgao extends Model
     use Notifiable;
     protected $table = 'orgaos';
     protected $fillable = [
-        'id_usuario', 'nome', 'cnpj', 'endereco', 'ordenador_nome', 'ordenador_sexo', 'ordenador_cargo', 'diligente_tipo', 'diligente_nome', 'diligente_sexo', 'diligente_cpf', 'pregoeiro_nome', 'ato_designacao', 'ordem', 'created_at', 'updated_at'
+        'id_usuario', 'nome', 'cnpj', 'endereco', 'ordenador_nome', 'ordenador_sexo', 'ordenador_cargo', 'dirigente_tipo', 'dirigente_nome', 'dirigente_sexo', 'dirigente_cpf','ordem', 'created_at', 'updated_at'
     ];
 
 

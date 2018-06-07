@@ -88,6 +88,51 @@
 										    </select>
 										    <label>FISCAL DE CONTRATO</label>
 										  </div>
+
+										<br>
+										
+										<div class="input-field">
+										    <select  name="id_pregoeiro">
+										      <!--<option value="" disabled selected>Escolha um Orgão Solicitante</option>-->
+										      @foreach($pregoeiros as $pregoeiro)                    
+								                   <option value="{{ $pregoeiro->id }}" @if (isset($registro->id_pregoeiro)) @if ($registro->id_pregoeiro == $pregoeiro->id) selected  @endif @endif > {{ $pregoeiro->nome }} </option> 
+								              @endforeach
+										    </select>
+										    <label>PREGOEIRO</label>
+										  </div>
+
+
+
+											  <label><H6>SERÁ EXIGIDA GARANTIA CONTRATUAL ?</H6></label>
+
+												<div class="switch">
+													<label>
+													  Não
+													  <input type="checkbox" name="garantia_contratual" id="garantia_contratual" value="1"  {{ isset($registro->garantia_contratual) && $registro->garantia_contratual == '1' ? 'checked' : '' }} >
+													  <span class="lever"></span>
+													  Sim
+													</label>
+												</div>
+												
+											<BR><BR>
+
+											
+											<div id="box_porcentagem_garantia" style="display: {{ isset($registro->garantia_contratual) && $registro->garantia_contratual == '1' ? '' : 'none' }};" >
+												<div class="input-field">												
+													 <select  name="porcentagem_garantia">
+												      <!--<option value="" disabled selected>Escolha um Orgão Solicitante</option>-->
+												                       
+										                 <option value="1" @if (isset($registro->porcentagem_garantia)) @if ($registro->porcentagem_garantia ==1) selected  @endif @endif > 1% </option> 
+										                 <option value="2" @if (isset($registro->porcentagem_garantia)) @if ($registro->porcentagem_garantia ==2) selected  @endif @endif > 2% </option> 
+										                 <option value="3" @if (isset($registro->porcentagem_garantia)) @if ($registro->porcentagem_garantia ==3) selected  @endif @endif > 3% </option> 
+										                 <option value="4" @if (isset($registro->porcentagem_garantia)) @if ($registro->porcentagem_garantia ==4) selected  @endif @endif > 4% </option> 
+										                 <option value="5" @if (isset($registro->porcentagem_garantia)) @if ($registro->porcentagem_garantia ==5) selected  @endif @endif > 5% </option> 
+										             
+												    </select>										
+													<label>PORCENTAGEM ( % )</label>
+												</div>
+												<br>
+											</div>
 										
 							       </div>
 							       <div class="step-actions">
@@ -109,4 +154,31 @@
    </div>
 </div>
 
+@endsection
+
+
+@section('page-script')
+<script type="text/javascript">
+
+	$(document).ready(function(){
+
+/*
+    * Este método mostra a porcentagem caso seja exigida garantia contratual
+    */
+	$("#garantia_contratual").on("click",function() {
+		
+	  var status = $("input[name=garantia_contratual]").prop('checked');
+	  console.log(status);
+	  if( status == true){
+	  	$("#box_porcentagem_garantia").show();
+	  }else{
+	  	$("#box_porcentagem_garantia").hide();
+	  	$( "input[name=porcentagem_garantia]" ).val('');
+	  }
+	})
+
+
+    }); 
+
+</script>
 @endsection

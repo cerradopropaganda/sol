@@ -9,6 +9,7 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/css/materialize.min.css">
   <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.16/css/jquery.dataTables.min.css">
   <link rel="stylesheet" href="{{ asset('css/materialize-stepper.min.css') }}">
+  <link rel="stylesheet" href="{{ asset('js/trumbowyg/ui/trumbowyg.min.css')}}">
 
 
   <link href="//cdn.bri.io/mbox/dist/mbox-0.0.5.min.css" rel="stylesheet">
@@ -35,13 +36,26 @@
     border: 1px solid #999!important;
     background: white;
     padding: 20px;
+    display: block;
+    overflow-y: scroll;
 }
 .autocomplete-suggestion{ border-bottom: 1px solid #999; padding: 10px; cursor: pointer; }
 .autocomplete-suggestion:hover{ background: #f3f3f3;}
 
 	.error{ background: #ff00002b; }
+
+
+
+.lista_orcamentos [type="checkbox"]+label {
+    /*font-size: .7rem;*/
+}
+
+
+
   	
   </style>
+
+
 </head>
 <body class="grey lighten-2">
 
@@ -110,23 +124,34 @@
 					      </ul>
 					      <ul class="side-nav" id="mobile-demo">
 					        <li><a class="teal-text text-lighten-2" href="{{route('cliente.index')}}"><i class="material-icons left">dashboard</i>Início</a></li>
+					        @if(Auth::user()->nivel<=2)
 							<li><a class="teal-text text-lighten-2 dropdown-button" href="#!"  data-activates="dropdown-cadastro-mobile"><i class="material-icons left">library_books</i>Cadatro<i class="material-icons right">arrow_drop_down</i></a></li>
+							@endif
 							<li><a class="teal-text text-lighten-2 dropdown-button" href="#!"  data-activates="dropdown-evento-mobile"><i class="material-icons left">event_note</i>Evento<i class="material-icons right">arrow_drop_down</i></a></li>
+							@if(Auth::user()->nivel<=3)
 							<li><a class="teal-text text-lighten-2 dropdown-button" href="#!"  data-activates="dropdown-solicitar-mobile"><i class="material-icons left">bookmark_border</i>Solicitar<i class="material-icons right">arrow_drop_down</i></a></li>
+							@endif
 					      </ul>
 					      <!-- Dropdown Cadastro -->
 							<ul id="dropdown-cadastro" class="dropdown-content">							 
 							  <li><a class="teal-text text-lighten-2" href="{{route('cliente.usuarios')}}">Usuários do Sistema</a></li>
 							  <li><a class="teal-text text-lighten-2" href="{{route('cliente.orgaos')}}">Órgão Solicitante</a></li>
 							  <li><a class="teal-text text-lighten-2" href="{{route('cliente.fiscais')}}">Fiscal de Contrato</a></li>
+							  <li><a class="teal-text text-lighten-2" href="{{route('cliente.pregoeiros')}}">Pregoeiros</a></li>
 							  <li><a class="teal-text text-lighten-2" href="{{route('cliente.header')}}">Logomarca e Cabeçalho</a></li>
 							</ul>
 						  <!-- Dropdown Evento -->
 							<ul id="dropdown-evento" class="dropdown-content">
+							  @if(Auth::user()->nivel<>5)
 							  <li><a class="teal-text text-lighten-2" href="{{route('cliente.eventos.adicionar')}}">Novo</a></li>
+							  @endif
 							  <li><a class="teal-text text-lighten-2" href="{{route('cliente.eventos.fase_inicial')}}">Fase Inicial</a></li>
+							  @if(Auth::user()->nivel<>5)
 							  <li><a class="teal-text text-lighten-2" href="{{route('cliente.eventos.fase_final')}}">Fase Final</a></li>
+							  @endif
+							  @if(Auth::user()->nivel<>5)
 							  <li><a class="teal-text text-lighten-2" href="{{route('cliente.eventos.concluidos')}}">Concluídos</a></li>
+							  @endif
 							</ul>
 						  <!-- Dropdown Solicitar -->
 							<ul id="dropdown-solicitar" class="dropdown-content">
@@ -136,13 +161,18 @@
 
 						  <!-- Dropdown Cadastro - Mobile -->
 							<ul id="dropdown-cadastro-mobile" class="dropdown-content">
-							  <li><a class="teal-text text-lighten-2" href="#!">Órgão Solicitante</a></li>
-							  <li><a class="teal-text text-lighten-2" href="#!">Fiscal de Contrato</a></li>
+							  <li><a class="teal-text text-lighten-2" href="{{route('cliente.usuarios')}}">Usuários do Sistema</a></li>
+							  <li><a class="teal-text text-lighten-2" href="{{route('cliente.orgaos')}}">Órgão Solicitante</a></li>
+							  <li><a class="teal-text text-lighten-2" href="{{route('cliente.fiscais')}}">Fiscal de Contrato</a></li>
+							  <li><a class="teal-text text-lighten-2" href="{{route('cliente.pregoeiros')}}">Pregoeiros</a></li>
+							  <li><a class="teal-text text-lighten-2" href="{{route('cliente.header')}}">Logomarca e Cabeçalho</a></li>
 							</ul>
 						  <!-- Dropdown Evento - Mobile -->
 							<ul id="dropdown-evento-mobile" class="dropdown-content">
-							  <li><a class="teal-text text-lighten-2" href="#!">Novo</a></li>
-							  <li><a class="teal-text text-lighten-2" href="#!">Em Andamento</a></li>
+							  <li><a class="teal-text text-lighten-2" href="{{route('cliente.eventos.adicionar')}}">Novo</a></li>
+							  <li><a class="teal-text text-lighten-2" href="{{route('cliente.eventos.fase_inicial')}}">Fase Inicial</a></li>
+							  <li><a class="teal-text text-lighten-2" href="{{route('cliente.eventos.fase_final')}}">Fase Final</a></li>
+							  <li><a class="teal-text text-lighten-2" href="{{route('cliente.eventos.concluidos')}}">Concluídos</a></li>
 							</ul>
 						  <!-- Dropdown Solicitar - Mobile -->
 							<ul id="dropdown-solicitar-mobile" class="dropdown-content">

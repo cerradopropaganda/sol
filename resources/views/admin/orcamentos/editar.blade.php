@@ -35,14 +35,14 @@
             
             <div class="card-content white">
         
-                      <form class="" method="post" action="{{ route('admin.orcamentos.atualizar',$registro->id)}}">
+                      <form class="" method="post" action="{{ route('admin.orcamentos.atualizar',$registro->id)}}" enctype="multipart/form-data">
                         
                         {{ csrf_field() }}
                         <input type="hidden" name="_method" value="put">
                         @include('admin.orcamentos._form')
 
-                        <!--<button class="btn blue darken-1">Editar Item</button>-->
-                        <a onclick="location.href ='{{ route('admin.orcamentos')}}'" class="btn blue darken-1">Editar Orçamento</a>  
+                        <button class="btn blue darken-1">Editar Orçamento</button>
+                        <!--<a onclick="location.href ='{{ route('admin.orcamentos')}}'" class="btn blue darken-1">Editar Orçamento</a>  -->
 
 
 

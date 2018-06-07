@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <dwsync>
 <file name="IndexController.php" server="ftp.cerradopropaganda.com/public_html/dev/sistemaPrefeituras/" local="131641514373015663" remote="131668198200000000" Dst="1" />
-<file name="ItemController.php" server="ftp.cerradopropaganda.com/public_html/dev/sistemaPrefeituras/" local="131665601009874334" remote="131668198200000000" Dst="1" />
+<file name="ItemController.php" server="ftp.cerradopropaganda.com/public_html/dev/sistemaPrefeituras/" local="131678614520085999" remote="131680399800000000" Dst="1" />
 <file name="LoginController.php" server="ftp.cerradopropaganda.com/public_html/dev/sistemaPrefeituras/" local="131641514373025675" remote="131668198200000000" Dst="1" />
 <file name="UsuarioController.php" server="ftp.cerradopropaganda.com/public_html/dev/sistemaPrefeituras/" local="131650915037254782" remote="131668198200000000" Dst="1" />
 <file name="DocumentoController.php" server="ftp.cerradopropaganda.com/public_html/dev/sistemaPrefeituras/" local="131648367295654846" remote="131668198200000000" Dst="1" />
@@ -9,5 +9,6 @@
 <file name="ItemCategoriaController.php" server="ftp.cerradopropaganda.com/public_html/dev/sistemaPrefeituras/" local="131648291816657275" remote="131668198200000000" Dst="1" />
 <file name="ItemTipoController.php" server="ftp.cerradopropaganda.com/public_html/dev/sistemaPrefeituras/" local="131648291729378753" remote="131668198200000000" Dst="1" />
 <file name="ModalidadeController.php" server="ftp.cerradopropaganda.com/public_html/dev/sistemaPrefeituras/" local="131647349275040982" remote="131668198200000000" Dst="1" />
-<file name="TermoReferenciaController.php" server="ftp.cerradopropaganda.com/public_html/dev/sistemaPrefeituras/" local="131665676628685827" remote="131668198200000000" Dst="1" />
+<file name="TermoReferenciaController.php" server="ftp.cerradopropaganda.com/public_html/dev/sistemaPrefeituras/" local="131691476174848656" remote="131691614400000000" Dst="1" />
+<file name="OrcamentoController.php" server="ftp.cerradopropaganda.com/public_html/dev/sistemaPrefeituras/" local="131709763114772045" remote="131709763800000000" Dst="1" />
 </dwsync>

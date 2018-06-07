@@ -115,17 +115,66 @@ class TermoReferenciaController extends Controller
 
     public function mostrar($id){
 
-        $registro = TermoReferencia::SELECT('termo_referencia')->WHERE('codigo',$id)->get();
+        $registro = TermoReferencia::SELECT('termo_referencia')->WHERE('codigo',$id)->firstOrFail();
+
+        $termo_referencia = htmlentities(stripslashes($registro->termo_referencia));
+        //$termo_referencia = nl2br($registro->termo_referencia);
+
+       //dd($termo_referencia);
+
+        //$header=strstr( $termo_referencia . ' ', '1.', true );
+
+        $tmp = explode('1', $termo_referencia);
+        $header = array_shift($tmp);
+
+
+        $tmp2 = explode('1', $termo_referencia,2);
+        $list = array_pop( $tmp2);
+        $list='1'.$list;
+
+       // $tmp = explode('1. DO OBJETO', trim($termo_referencia));
+        //$list = end($tmp);
+       // $list='1. DO OBJETO'.$list;
+
+        //dd($list);
+
+
+
+
+
+        $termo_referencia_final = preg_replace_callback("#^([0-9.]*).*$#m",function($m){
+            $m[0]=substr($m[0],strlen($m[1])+1);
+            static $r=0;
+            $o='';
+            $l=preg_match_all("#\d+#",$m[1],$n);
+            while($l < $r)
+            {
+                $r--;
+                $o .= '</li></ol>';
+            }
+            if($l == $r)return $l == 0?$o.$m[0]:$o.'</li><li>'.$m[0];
+            else $o=$m[0];
+            while($l > $r)
+            {
+                $r++;
+                $o = '<ol><li>'.$o;
+            }
+            return $o;
+        }, $list);
+
+        $termo_referencia_final=nl2br($header.$termo_referencia_final);
 
         // encrypta a senha
         //if ($registro['password']<>'') {
         //    $registro['password'] = Hash::make($registro['password']);
         //}
 
-        //dd($registro['termo_referencia']);
+        //dd(utf8_decode($termo_referencia2));
 
 
-        return $registro;//Response::json($registro);
+
+
+        return ($termo_referencia_final);//Response::json($registro);
 
     }
 

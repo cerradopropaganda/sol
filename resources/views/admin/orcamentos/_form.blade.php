@@ -2,7 +2,7 @@
 	
 	<div class="col s7 m7">
 
-
+<!--
 		<div class="file-field input-field">
 	      <div class="btn grey">
 	        <span>ARQUIVO .CSV</span>
@@ -11,79 +11,90 @@
 	      <div class="file-path-wrapper">
 	        <input class="file-path validate" type="text">
 	      </div>
-	    </div>
+	    </div>-->
 
-		<!-- <div class="input-field">
-			<input type="text" name="cnpj" value="{{isset($registro->cnpj) ? $registro->cnpj : ''}}">
-			<label>CNPJ</label>
+		 <div class="input-field">
+			<input type="text" name="identificacao_compra" value="{{isset($registro->identificacao_compra) ? $registro->identificacao_compra : ''}}">
+			<label>IDENTIFICAÇÃO DA COMPRA</label>
 		</div>
 
 		<div class="input-field">
-			<input type="text" name="razao_social" value="{{isset($registro->razao_social) ? $registro->razao_social : ''}}">
-			<label>RAZÃO SOCIAL</label>
+			<input type="text" name="numero_item" value="{{isset($registro->numero_item) ? $registro->numero_item : ''}}">
+			<label>NÚMERO ITEM</label>
 		</div>
 
-		<div class="input-field">
-			<textarea class="materialize-textarea" name="orgao">{{isset($registro->orgao) ? $registro->orgao : ''}}</textarea>
-			<label>ORGÃO</label>
-		</div>
-
-		<div class="input-field">
-			<textarea class="materialize-textarea" name="objeto">{{isset($registro->objeto) ? $registro->objeto : ''}}</textarea>
-			<label>OBJETO</label>
-		</div>
-
-
-		<div class="input-field">
-			<input type="text" name="pregao" value="{{isset($registro->pregao) ? $registro->pregao : ''}}">
-			<label>PREGÃO</label>
-		</div>
-
-		
-		<div class="input-field">
+		<div class="input-field">			
 			<input type="text" name="modalidade" value="{{isset($registro->modalidade) ? $registro->modalidade : ''}}">
 			<label>MODALIDADE</label>
 		</div>
 
 		<div class="input-field">
-			<input type="text" name="identificacao" value="{{isset($registro->identificacao) ? $registro->identificacao : ''}}">
-			<label>IDENTIFICAÇÃO</label>
+			<input type="text" name="cat_mat" value="{{isset($registro->cat_mat) ? $registro->cat_mat : ''}}">
+			<label>CAT. MAT.</label>
 		</div>
+
 
 		<div class="input-field">
-			<input type="text" name="lote_item" value="{{isset($registro->lote_item) ? $registro->lote_item : ''}}">
-			<label>LOTE/ITEM</label>
+			<input type="text" name="item" value="{{isset($registro->item) ? $registro->item : ''}}">
+			<label>ITEM</label>
 		</div>
 
-		<div class="input-field">
-			<input type="text" name="fonte" value="{{isset($registro->fonte) ? $registro->fonte : ''}}">
-			<label>FONTE</label>
-		</div>
-
-		<div class="input-field">
-			<input type="text" name="quantidade" value="{{isset($registro->quantidade) ? $registro->quantidade : ''}}">
-			<label>QUANTIDADE</label>
-		</div>
-
+		
 		<div class="input-field">
 			<input type="text" name="unidade" value="{{isset($registro->unidade) ? $registro->unidade : ''}}">
 			<label>UNIDADE</label>
 		</div>
 
 		<div class="input-field">
+			<input type="text" name="qtde" value="{{isset($registro->qtde) ? $registro->qtde : ''}}">
+			<label>QUANTIDADE</label>
+		</div>
+
+		<div class="input-field">
 			<input type="text" name="valor" value="{{isset($registro->valor) ? $registro->valor : ''}}">
-			<label>VALOR R$</label>
+			<label>VALOR UNITÁRIO</label>
 		</div>
 
 		<div class="input-field">
-			<input type="text" name="arquivo" value="{{isset($registro->arquivo) ? $registro->arquivo : ''}}">
-			<label>ANEXAR ARQUIVO</label>
+			<textarea class="materialize-textarea" name="fornecedor">{{isset($registro->fornecedor) ? $registro->fornecedor : ''}}</textarea>
+			<label>FORNECEDOR</label>
 		</div>
 
 		<div class="input-field">
-			<input type="text" name="validade" value="{{isset($registro->validade) ? $registro->validade : ''}}">
-			<label>VALIDADE</label>
-		</div>-->
+			<input type="text" name="orgao" value="{{isset($registro->orgao) ? $registro->orgao : ''}}">
+			<label>ORGÃO</label>
+		</div>
+
+		<div class="input-field">
+			<textarea class="materialize-textarea" name="unidade_gestora">{{isset($registro->unidade_gestora) ? $registro->unidade_gestora : ''}}</textarea>
+			<label>UNIDADE GESTORA</label>
+		</div>
+
+		<div class="input-field">
+			<input type="text" class="datepicker" name="data_compra" value="{{isset($registro->data_compra) ? $registro->data_compra : ''}}">
+			<label>DATA DA COMPRA</label>
+		</div>
+
+		<span style="clear: both;">
+		<br>
+
+	   <div class="file-field input-field">
+	      <div class="btn">
+	        <span>ANEXO PDF</span>
+	        <input type="file"  name="anexo">
+	      </div>
+	      <div class="file-path-wrapper">
+	        <input class="file-path validate" type="text">
+	      </div>
+	    </div>
+
+	    @if(isset($registro->anexo))
+	    <div class="input-field">
+	      <img src="{{asset($registro->anexo)}}" width="150">
+	    </div>
+	    @endif
+
+		<input type="hidden" name="id_item" value="{{isset($registro->id_item) ? $registro->id_item : ''}}">
 
 			
 		<BR><BR>
